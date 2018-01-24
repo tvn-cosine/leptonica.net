@@ -37,7 +37,7 @@ Write-Host " "
 
 Write-Host "########"
 Write-Host "Cloning from git $localDirectory."
-$localDirectory = "C:\csource\tvn-cosine\$projectName\"
+$localDirectory = "C:\csource\$projectName\"
 
 Try
 {
@@ -71,7 +71,7 @@ Write-Host " "
 Write-Host "########"
 Write-Host "Packing nuget into $localDirectory." 
 Write-Host "Packing $localDirectory\$projectName\$projectName.csproj"
-& "C:\csource\nuget.exe" restore "$localDirectory\$projectName.sln"
+& "C:\csource\nuget.exe" restore "$localDirectory$projectName.sln"
 & "C:\csource\nuget.exe" pack "$localDirectory\$projectName\$projectName.csproj" -build
 Write-Host "Package created..." 
 Write-Host "########"
