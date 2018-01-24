@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "leptonica.net", "leptonica.net\leptonica.net.csproj", "{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {059103BC-CE41-4C77-B771-AC1D1A9C3805}
+	EndGlobalSection
+EndGlobal
