@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>821e68da-a2a3-40bf-9829-d5806dcb7eef</ProjectGuid>
+    <ProjectGuid>{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>leptonica.net</RootNamespace>
+    <RootNamespace>Leptonica</RootNamespace>
     <AssemblyName>leptonica.net</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,24 +31,352 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Definitions\Array\FlagsForAddedBordersInNumaAndFpix.cs" />
+    <Compile Include="Definitions\Array\FlagsForDataTypeConvertedFromNuma.cs" />
+    <Compile Include="Definitions\Array\FlagsForInterpolationInNuma.cs" />
+    <Compile Include="Definitions\Array\L_Bytea.cs" />
+    <Compile Include="Definitions\Array\L_Dna.cs" />
+    <Compile Include="Definitions\Array\L_Dnaa.cs" />
+    <Compile Include="Definitions\Array\L_DnaHash.cs" />
+    <Compile Include="Definitions\Array\Numa.cs" />
+    <Compile Include="Definitions\Array\Numaa.cs" />
+    <Compile Include="Definitions\Array\Sarray.cs" />
+    <Compile Include="Definitions\Bilateral\L_Bilateral.cs" />
+    <Compile Include="Definitions\Bmf\BmfData.cs" />
+    <Compile Include="Definitions\Bmf\ConstantsForDecidingWhenTextBlockIsDividedIntoParagraphs.cs" />
+    <Compile Include="Definitions\Bmf\L_Bmf.cs" />
+    <Compile Include="Definitions\Bmp\BMP_FileHeader.cs" />
+    <Compile Include="Definitions\Bmp\BMP_InfoHeader.cs" />
+    <Compile Include="Definitions\Buffer\L_ByteBuffer.cs" />
+    <Compile Include="Definitions\CCBord\CCBord.cs" />
+    <Compile Include="Definitions\CCBord\CCBorda.cs" />
+    <Compile Include="Definitions\CCBord\UseInCcbaGenerateSPGlobalLocs.cs" />
+    <Compile Include="Definitions\CCBord\UseInCcbaStepChainsToPixCoords.cs" />
+    <Compile Include="Definitions\ColorQuant\ColorQuantCell.cs" />
+    <Compile Include="Definitions\ColorQuant\L_OctcubePop.cs" />
+    <Compile Include="Definitions\ColorQuant\OctcubeQuantCell.cs" />
+    <Compile Include="Definitions\Dewarp\L_Dewarp.cs" />
+    <Compile Include="Definitions\Dewarp\L_Dewarpa.cs" />
+    <Compile Include="Definitions\Environ\ControlPrintingOfErrorWarningAndInfoMessages.cs" />
+    <Compile Include="Definitions\Environ\L_WallTimer.cs" />
+    <Compile Include="Definitions\Environ\PathSeparatorConversion.cs" />
+    <Compile Include="Definitions\Environ\SimpleSearchStateVariables.cs" />
+    <Compile Include="Definitions\GPlot\GPlot.cs" />
+    <Compile Include="Definitions\GPlot\GPLOT_OUTPUT.cs" />
+    <Compile Include="Definitions\GPlot\GPLOT_SCALING.cs" />
+    <Compile Include="Definitions\GPlot\GPLOT_STYLE.cs" />
+    <Compile Include="Definitions\Heap\L_Heap.cs" />
+    <Compile Include="Definitions\ImageIO\FormatHeaderIds.cs" />
+    <Compile Include="Definitions\ImageIO\HintingBitFlagsInJpegReader.cs" />
+    <Compile Include="Definitions\ImageIO\ImageFileFormatTypes.cs" />
+    <Compile Include="Definitions\ImageIO\L_Compressed_Data.cs" />
+    <Compile Include="Definitions\ImageIO\L_Pdf_Data.cs" />
+    <Compile Include="Definitions\ImageIO\PdfFormattedEncodingTypes.cs" />
+    <Compile Include="Definitions\ImageIO\PdfMultiImageFlags.cs" />
+    <Compile Include="Definitions\JBClass\ClassifierMethods.cs" />
+    <Compile Include="Definitions\JBClass\ForJbGetComponentsYypeOfComponentToExtractFromImages.cs" />
+    <Compile Include="Definitions\JBClass\JbClasser.cs" />
+    <Compile Include="Definitions\JBClass\JbData.cs" />
+    <Compile Include="Definitions\LeptonicaObjectBase.cs" />
+    <Compile Include="Definitions\List\DoubleLinkedList.cs" />
+    <Compile Include="Definitions\Morph\ArithmeticAndLogicalOperatorFlags.cs" />
+    <Compile Include="Definitions\Morph\ColorContentFlags.cs" />
+    <Compile Include="Definitions\Morph\DirectionFlags.cs" />
+    <Compile Include="Definitions\Morph\DistanceFunctionBCFlags.cs" />
+    <Compile Include="Definitions\Morph\GrayscaleIntensityScalingFlags.cs" />
+    <Compile Include="Definitions\Morph\ImageComparisonFlags.cs" />
+    <Compile Include="Definitions\Morph\L_Kernel.cs" />
+    <Compile Include="Definitions\Morph\MinMaxSelectionFlags.cs" />
+    <Compile Include="Definitions\Morph\MorphologicaBoundaryConditionFlags.cs" />
+    <Compile Include="Definitions\Morph\MorphologicalOperationFlags.cs" />
+    <Compile Include="Definitions\Morph\MorphologicalTophatFlags.cs" />
+    <Compile Include="Definitions\Morph\RunlengthFlagsForGranulometry.cs" />
+    <Compile Include="Definitions\Morph\Sel.cs" />
+    <Compile Include="Definitions\Morph\Sela.cs" />
+    <Compile Include="Definitions\Morph\StructuringElementTypes.cs" />
+    <Compile Include="Definitions\Pix\AccessAndStorageFlags.cs" />
+    <Compile Include="Definitions\Pix\AffineTransformationOrderFlags.cs" />
+    <Compile Include="Definitions\Pix\BackgroundFlags.cs" />
+    <Compile Include="Definitions\Pix\BendFlags.cs" />
+    <Compile Include="Definitions\Pix\Box.cs" />
+    <Compile Include="Definitions\Pix\Boxa.cs" />
+    <Compile Include="Definitions\Pix\Boxaa.cs" />
+    <Compile Include="Definitions\Pix\BoxSizeAdjustmentAndLocationFlags.cs" />
+    <Compile Include="Definitions\Pix\ClearOrSetPixels.cs" />
+    <Compile Include="Definitions\Pix\ColorComponentSelectionFlags.cs" />
+    <Compile Include="Definitions\Pix\ColorizePixelFlags.cs" />
+    <Compile Include="Definitions\Pix\ColorsFor32Bpp.cs" />
+    <Compile Include="Definitions\Pix\ColorsForDrawingBoxes.cs" />
+    <Compile Include="Definitions\Pix\DistanceFlags.cs" />
+    <Compile Include="Definitions\Pix\DitherParameters.cs" />
+    <Compile Include="Definitions\Pix\DPix.cs" />
+    <Compile Include="Definitions\Pix\EdgeFilterFlags.cs" />
+    <Compile Include="Definitions\Pix\EdgeOrientationFlags.cs" />
+    <Compile Include="Definitions\Pix\FlagsFor8BitAnd16BitSums.cs" />
+    <Compile Include="Definitions\Pix\FlagsForAddingOrRemovingTralingSlashFromString.cs" />
+    <Compile Include="Definitions\Pix\FlagsForAddingTextToAPix.cs" />
+    <Compile Include="Definitions\Pix\FlagsForColormapConversion.cs" />
+    <Compile Include="Definitions\Pix\FlagsForGettingWhiteOrBlackValue.cs" />
+    <Compile Include="Definitions\Pix\FlagsForPlottingOnAPix.cs" />
+    <Compile Include="Definitions\Pix\FlagsForReplacingInvalidBoxes.cs" />
+    <Compile Include="Definitions\Pix\FlagsForSelectingBoxBoundariesFromTwoChoices.cs" />
+    <Compile Include="Definitions\Pix\FlagsForSelectingDisplayProgram.cs" />
+    <Compile Include="Definitions\Pix\FlagsForSettingToBlackOrWhite.cs" />
+    <Compile Include="Definitions\Pix\FlagsUsedInPixSpecial.cs" />
+    <Compile Include="Definitions\Pix\FPix.cs" />
+    <Compile Include="Definitions\Pix\FPixa.cs" />
+    <Compile Include="Definitions\Pix\GraphicsPixelSetting.cs" />
+    <Compile Include="Definitions\Pix\GrayscaleFillingFlags.cs" />
+    <Compile Include="Definitions\Pix\HandlingNegativeValuesInConversionToUnsignedInt.cs" />
+    <Compile Include="Definitions\Pix\HandlingOverlappingBoundingBoxesInBoxa.cs" />
+    <Compile Include="Definitions\Pix\HorizonalWarpDirection.cs" />
+    <Compile Include="Definitions\Pix\HorizonalWarpStretchMode.cs" />
+    <Compile Include="Definitions\Pix\HSVHistogramFlags.cs" />
+    <Compile Include="Definitions\Pix\LineOrientationFlags.cs" />
+    <Compile Include="Definitions\Pix\LocationFilterFlags.cs" />
+    <Compile Include="Definitions\Pix\Pix.cs" />
+    <Compile Include="Definitions\Pix\Pixa.cs" />
+    <Compile Include="Definitions\Pix\Pixaa.cs" />
+    <Compile Include="Definitions\Pix\Pixacc.cs" />
+    <Compile Include="Definitions\Pix\PixaComp.cs" />
+    <Compile Include="Definitions\Pix\PixColormap.cs" />
+    <Compile Include="Definitions\Pix\PixComp.cs" />
+    <Compile Include="Definitions\Pix\PixelSelectionForResampling.cs" />
+    <Compile Include="Definitions\Pix\PixTiling.cs" />
+    <Compile Include="Definitions\Pix\Pta.cs" />
+    <Compile Include="Definitions\Pix\Ptaa.cs" />
+    <Compile Include="Definitions\Pix\RegionFlagsInclusionExclusion.cs" />
+    <Compile Include="Definitions\Pix\RelativeToZeroFlags.cs" />
+    <Compile Include="Definitions\Pix\RGBA_Quad.cs" />
+    <Compile Include="Definitions\Pix\RotateFlags.cs" />
+    <Compile Include="Definitions\Pix\RunlengthFlags.cs" />
+    <Compile Include="Definitions\Pix\ScanDirectionFlags.cs" />
+    <Compile Include="Definitions\Pix\SetSelectionFlags.cs" />
+    <Compile Include="Definitions\Pix\ShearFlags.cs" />
+    <Compile Include="Definitions\Pix\SizeFilterFlags.cs" />
+    <Compile Include="Definitions\Pix\SortModeFlags.cs" />
+    <Compile Include="Definitions\Pix\SortOrderFlags.cs" />
+    <Compile Include="Definitions\Pix\SortTypeFlags.cs" />
+    <Compile Include="Definitions\Pix\StatisticalMeasures.cs" />
+    <Compile Include="Definitions\Pix\SubpixelColorComponentOrderingInLCDisplay.cs" />
+    <Compile Include="Definitions\Pix\TextOrientationFlags.cs" />
+    <Compile Include="Definitions\Pix\ThinningFlags.cs" />
+    <Compile Include="Definitions\Pix\_16BitConversionFlags.cs" />
+    <Compile Include="Definitions\Ptra\AccessorFlagsForL_Ptraa.cs" />
+    <Compile Include="Definitions\Ptra\FlagsForInsertionIntoL_Ptra.cs" />
+    <Compile Include="Definitions\Ptra\FlagsForRemovalFromL_Ptra.cs" />
+    <Compile Include="Definitions\Ptra\L_Ptra.cs" />
+    <Compile Include="Definitions\Ptra\L_Ptraa.cs" />
+    <Compile Include="Definitions\Queue\Queue.cs" />
+    <Compile Include="Definitions\RBTree\L_AMap.cs" />
+    <Compile Include="Definitions\RBTree\L_AMap_Node.cs" />
+    <Compile Include="Definitions\RBTree\L_ASet.cs" />
+    <Compile Include="Definitions\RBTree\L_ASet_Node.cs" />
+    <Compile Include="Definitions\RBTree\L_Rbtree.cs" />
+    <Compile Include="Definitions\RBTree\L_Rbtree_Node.cs" />
+    <Compile Include="Definitions\RBTree\Rb_Type.cs" />
+    <Compile Include="Definitions\RBTree\ValidKeyYypesForRedblackTreesMapsAndSets.cs" />
+    <Compile Include="Definitions\ReadBarcode\FlagsForBarcodeFormats.cs" />
+    <Compile Include="Definitions\ReadBarcode\FlagsForMethodOfExtractingBarcodeWidths.cs" />
+    <Compile Include="Definitions\Recog\FlagsForDescribingLimitedCharacterSets.cs" />
+    <Compile Include="Definitions\Recog\FlagsForSelectingAverageOrAllTemplates.cs" />
+    <Compile Include="Definitions\Recog\L_Rch.cs" />
+    <Compile Include="Definitions\Recog\L_Rcha.cs" />
+    <Compile Include="Definitions\Recog\L_Rdid.cs" />
+    <Compile Include="Definitions\Recog\L_Recog.cs" />
+    <Compile Include="Definitions\RegUtils\L_RegParams.cs" />
+    <Compile Include="Definitions\RegUtils\RunningModesForTheTest.cs" />
+    <Compile Include="Definitions\Stack\FillSeg.cs" />
+    <Compile Include="Definitions\Stack\L_Stack.cs" />
+    <Compile Include="Definitions\StringCode\L_GenAssoc.cs" />
+    <Compile Include="Definitions\StringCode\L_StrCode.cs" />
+    <Compile Include="Definitions\StringCode\SelectStringInStringcodeForASpecificSerializableDataType.cs" />
+    <Compile Include="Definitions\Sudoku\ForPrintingOutArrayData.cs" />
+    <Compile Include="Definitions\Sudoku\L_Sudoku.cs" />
+    <Compile Include="Definitions\Watershed\L_WShed.cs" />
+    <Compile Include="Implementations\AdaptMap.cs" />
+    <Compile Include="Implementations\Affine.cs" />
+    <Compile Include="Implementations\AffineCompose.cs" />
+    <Compile Include="Implementations\ArrayAccess.cs" />
+    <Compile Include="Implementations\Bardecode.cs" />
+    <Compile Include="Implementations\Baseline.cs" />
+    <Compile Include="Implementations\Bilateral.cs" />
+    <Compile Include="Implementations\Bilinear.cs" />
+    <Compile Include="Implementations\Binarize.cs" />
+    <Compile Include="Implementations\BinExpand.cs" />
+    <Compile Include="Implementations\BinReduce.cs" />
+    <Compile Include="Implementations\Blend.cs" />
+    <Compile Include="Implementations\Bmf.cs" />
+    <Compile Include="Implementations\BmpIO.cs" />
+    <Compile Include="Implementations\BootNumGen1.cs" />
+    <Compile Include="Implementations\BootNumGen2.cs" />
+    <Compile Include="Implementations\BootNumGen3.cs" />
+    <Compile Include="Implementations\BoxBasic.cs" />
+    <Compile Include="Implementations\BoxFunc1.cs" />
+    <Compile Include="Implementations\BoxFunc2.cs" />
+    <Compile Include="Implementations\BoxFunc3.cs" />
+    <Compile Include="Implementations\BoxFunc4.cs" />
+    <Compile Include="Implementations\Buffer.cs" />
+    <Compile Include="Implementations\ByteArray.cs" />
+    <Compile Include="Implementations\CCBoard.cs" />
+    <Compile Include="Implementations\CCThin.cs" />
+    <Compile Include="Implementations\ClassApp.cs" />
+    <Compile Include="Implementations\ColorContent.cs" />
+    <Compile Include="Implementations\Coloring.cs" />
+    <Compile Include="Implementations\Colormap.cs" />
+    <Compile Include="Implementations\ColorMorph.cs" />
+    <Compile Include="Implementations\ColorQuant1.cs" />
+    <Compile Include="Implementations\ColorQuant2.cs" />
+    <Compile Include="Implementations\ColorSeg.cs" />
+    <Compile Include="Implementations\ColorSpace.cs" />
+    <Compile Include="Implementations\Compare.cs" />
+    <Compile Include="Implementations\ConnComp.cs" />
+    <Compile Include="Implementations\ConvertFiles.cs" />
+    <Compile Include="Implementations\Convolve.cs" />
+    <Compile Include="Implementations\CorrelScore.cs" />
+    <Compile Include="Implementations\Dewarp1.cs" />
+    <Compile Include="Implementations\Dewarp2.cs" />
+    <Compile Include="Implementations\Dewarp3.cs" />
+    <Compile Include="Implementations\Dewarp4.cs" />
+    <Compile Include="Implementations\DnaBasic.cs" />
+    <Compile Include="Implementations\DnaFunc1.cs" />
+    <Compile Include="Implementations\DnaHash.cs" />
+    <Compile Include="Implementations\DwaComb2.cs" />
+    <Compile Include="Implementations\DwaCombLow.cs" />
+    <Compile Include="Implementations\Edge.cs" />
+    <Compile Include="Implementations\Encoding.cs" />
+    <Compile Include="Implementations\Enhance.cs" />
+    <Compile Include="Implementations\FhmtAuto.cs" />
+    <Compile Include="Implementations\FhmtGen1.cs" />
+    <Compile Include="Implementations\FhmtGenLow1.cs" />
+    <Compile Include="Implementations\FindItalic.cs" />
+    <Compile Include="Implementations\FlipDetect.cs" />
+    <Compile Include="Implementations\FlipHmtGen.cs" />
+    <Compile Include="Implementations\FMorphAuto.cs" />
+    <Compile Include="Implementations\FMorphGen1.cs" />
+    <Compile Include="Implementations\FMorphGenLow1.cs" />
+    <Compile Include="Implementations\FPix1.cs" />
+    <Compile Include="Implementations\FPix2.cs" />
+    <Compile Include="Implementations\GifIO.cs" />
+    <Compile Include="Implementations\GPlot.cs" />
+    <Compile Include="Implementations\Graphics.cs" />
+    <Compile Include="Implementations\GrayMorph.cs" />
+    <Compile Include="Implementations\GrayQuant.cs" />
+    <Compile Include="Implementations\GrayQuantLow.cs" />
+    <Compile Include="Implementations\Heap.cs" />
+    <Compile Include="Implementations\JbClass.cs" />
+    <Compile Include="Implementations\Jp2kHeader.cs" />
+    <Compile Include="Implementations\JpegIO.cs" />
+    <Compile Include="Implementations\Jpk2IO.cs" />
+    <Compile Include="Implementations\Kernel.cs" />
+    <Compile Include="Implementations\LibVersions.cs" />
+    <Compile Include="Implementations\List.cs" />
+    <Compile Include="Implementations\Map.cs" />
+    <Compile Include="Implementations\Maze.cs" />
+    <Compile Include="Implementations\Morph.cs" />
+    <Compile Include="Implementations\MorphApp.cs" />
+    <Compile Include="Implementations\MorphDwa.cs" />
+    <Compile Include="Implementations\MorphSeq.cs" />
+    <Compile Include="Implementations\NumaBasic.cs" />
+    <Compile Include="Implementations\NumaFunc1.cs" />
+    <Compile Include="Implementations\NumaFunc2.cs" />
+    <Compile Include="Implementations\PageSeg.cs" />
+    <Compile Include="Implementations\PaintCMap.cs" />
+    <Compile Include="Implementations\ParseProtos.cs" />
+    <Compile Include="Implementations\Partition.cs" />
+    <Compile Include="Implementations\PdfIO1.cs" />
+    <Compile Include="Implementations\PdfIO2.cs" />
+    <Compile Include="Implementations\Pix1.cs" />
+    <Compile Include="Implementations\Pix2.cs" />
+    <Compile Include="Implementations\Pix3.cs" />
+    <Compile Include="Implementations\Pix4.cs" />
+    <Compile Include="Implementations\Pix5.cs" />
+    <Compile Include="Implementations\PixaBasic.cs" />
+    <Compile Include="Implementations\PixAcc.cs" />
+    <Compile Include="Implementations\PixaFunc1.cs" />
+    <Compile Include="Implementations\PixaFunc2.cs" />
+    <Compile Include="Implementations\PixAlloc.cs" />
+    <Compile Include="Implementations\PixArith.cs" />
+    <Compile Include="Implementations\PixComp.cs" />
+    <Compile Include="Implementations\PixConv.cs" />
+    <Compile Include="Implementations\PixLabel.cs" />
+    <Compile Include="Implementations\PixTiling.cs" />
+    <Compile Include="Implementations\PngIO.cs" />
+    <Compile Include="Implementations\PnmIO.cs" />
+    <Compile Include="Implementations\Projective.cs" />
+    <Compile Include="Implementations\PsIO1.cs" />
+    <Compile Include="Implementations\PsIO2.cs" />
+    <Compile Include="Implementations\PtaBasic.cs" />
+    <Compile Include="Implementations\PtaFunc1.cs" />
+    <Compile Include="Implementations\PtaFunc2.cs" />
+    <Compile Include="Implementations\Ptra.cs" />
+    <Compile Include="Implementations\QuadTree.cs" />
+    <Compile Include="Implementations\Queue.cs" />
+    <Compile Include="Implementations\Rank.cs" />
+    <Compile Include="Implementations\RbTree.cs" />
+    <Compile Include="Implementations\ReadBarcode.cs" />
+    <Compile Include="Implementations\ReadFile.cs" />
+    <Compile Include="Implementations\RecogBasic.cs" />
+    <Compile Include="Implementations\RecogDid.cs" />
+    <Compile Include="Implementations\RecogIdent.cs" />
+    <Compile Include="Implementations\RecogTrain.cs" />
+    <Compile Include="Implementations\RegUtils.cs" />
+    <Compile Include="Implementations\Rop.cs" />
+    <Compile Include="Implementations\RopIpLow.cs" />
+    <Compile Include="Implementations\RopLow.cs" />
+    <Compile Include="Implementations\Rotate.cs" />
+    <Compile Include="Implementations\RotateAm.cs" />
+    <Compile Include="Implementations\RotateAmLow.cs" />
+    <Compile Include="Implementations\RotateOrth.cs" />
+    <Compile Include="Implementations\RotateShear.cs" />
+    <Compile Include="Implementations\RunLength.cs" />
+    <Compile Include="Implementations\Sarray1.cs" />
+    <Compile Include="Implementations\Sarray2.cs" />
+    <Compile Include="Implementations\Scale.cs" />
+    <Compile Include="Implementations\ScaleLow.cs" />
+    <Compile Include="Implementations\SeedFill.cs" />
+    <Compile Include="Implementations\SeedFillow.cs" />
+    <Compile Include="Implementations\Sel1.cs" />
+    <Compile Include="Implementations\Sel2.cs" />
+    <Compile Include="Implementations\SelGen.cs" />
+    <Compile Include="Implementations\Shear.cs" />
+    <Compile Include="Implementations\Skew.cs" />
+    <Compile Include="Implementations\SpixIo.cs" />
+    <Compile Include="Implementations\Stack.cs" />
+    <Compile Include="Implementations\StringCode.cs" />
+    <Compile Include="Implementations\Strokes.cs" />
+    <Compile Include="Implementations\Sudoku.cs" />
+    <Compile Include="Implementations\TextOps.cs" />
+    <Compile Include="Implementations\TiffIo.cs" />
+    <Compile Include="Implementations\Utils1.cs" />
+    <Compile Include="Implementations\Utils2.cs" />
+    <Compile Include="Implementations\Warper.cs" />
+    <Compile Include="Implementations\WaterShed.cs" />
+    <Compile Include="Implementations\WebpIo.cs" />
+    <Compile Include="Implementations\WriteFile.cs" />
+    <Compile Include="Implementations\ZLibMem.cs" />
+    <Compile Include="Native\Architecture.cs" />
+    <Compile Include="Native\DllImports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="leptonica.net.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\x64\" />
+    <Folder Include="lib\x86\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>
