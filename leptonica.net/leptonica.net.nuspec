@@ -15,7 +15,7 @@
       These are breaking changes!
       Updated the Leptonica dll to use release build {@moriyac}.
       Updated to version 1.75 of leptonica.
-      Updated to .net framework 1.7.1
+      Updated to .net framework 4.5.2
       Moved the source code to its own repository
       Changed project url to https://github.com/tvn-cosine/leptonica.net/wiki
     </releaseNotes>
