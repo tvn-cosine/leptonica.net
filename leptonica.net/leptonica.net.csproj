@@ -412,6 +412,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="leptonica.net.targets" />
     <None Include="lib\x64\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll" />
     <None Include="lib\x64\pvt.cppan.demo.jpeg-9.2.0.dll" />
     <None Include="lib\x64\pvt.cppan.demo.madler.zlib-1.2.11.dll" />
