@@ -20,8 +20,8 @@
     <dependencies />
   </metadata>
   <files>
-    <file src="lib\x86\*.dll" target="lib\x86\" />
-    <file src="lib\x64\*.dll" target="lib\x64\" />
+    <file src="lib\x86\*.dll" target="content\x86\" copyToOutput="true" />
+    <file src="lib\x64\*.dll" target="content\x64\" copyToOutput="true" />
     <file src="bin\net452\leptonica.net.dll" target="lib/net452/" />
     <file src="bin\net462\leptonica.net.dll" target="lib/net462/" />
     <file src="bin\net471\leptonica.net.dll" target="lib/net471/" /> 
