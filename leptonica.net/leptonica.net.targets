@@ -1,11 +1,8 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)/../lib/x86/pvt.cppan.demo.madler.zlib-1.2.11.dll">
-      <Link>pvt.cppan.demo.madler.zlib-1.2.11.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)/../lib/x86/pvt.cppan.demo.jpeg-9.2.0.dll">
-      <Link>pvt.cppan.demo.madler.zlib-1.2.11.dll</Link>
+    <NativeLibs Include="$(MSBuildThisFileDirectory)**\*.dll" />
+    <None Include="@(NativeLibs)">
+      <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
