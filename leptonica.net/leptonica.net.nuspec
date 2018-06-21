@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"?>
 <package >
-  <metadata>
+  <metadata minClientVersion="2.5">
     <id>leptonica.net</id>
     <title>leptonica.net</title>
     <version>$version$</version>
