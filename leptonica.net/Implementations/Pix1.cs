@@ -35,6 +35,26 @@ namespace Leptonica
             Native.DllImports.setPixMemoryManager(allocator, deallocator);
         }
 
+        public unsafe static Pix pixReadFromMemoryStream(System.IO.Stream stream)
+        {
+            Pix pix;
+
+            using (var image = System.Drawing.Image.FromStream(stream))
+            {
+                using (var ms = new System.IO.MemoryStream())
+                {
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                    var bytes = ms.ToArray();
+                    fixed (byte* ptr = bytes)
+                    {
+                        pix = BmpIO.pixReadMemBmp((IntPtr)ptr, (IntPtr)bytes.Length);
+                    }
+                }
+            }
+
+            return pix;
+        }
+
         // Pix creation
         /// <summary>
         /// 
