@@ -7,8 +7,8 @@ namespace Leptonica.Native
     internal class DllImports
     {
         private const string pattern = @"pvt.cppan.demo.";
-        private const string x64 = @"lib\x64";
-        private const string x86 = @"lib\x86";
+        private const string x64 = @"x64";
+        private const string x86 = @"x86";
         private const string leptonicaDllName = "pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll";
 
         static DllImports()
