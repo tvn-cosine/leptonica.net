@@ -13,19 +13,17 @@
     <summary>a .net wrapper for Leptonica image manipulation.</summary>
     <releaseNotes>
       Added compiled dlls for higher frameworks.
-      Added pixReadFromMemoryStream(System.IO.Stream stream) @CSharpReaper -- Not tested
-      Implemented targets file to ensure libs is set to copy to output directory
+      Added pixReadFromMemoryStream(System.IO.Stream stream) @CSharpReaper -- Not tested 
     </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>leptonica dotNet image manipulation</tags>
     <dependencies />
   </metadata>
   <files>
-    <file src="lib\x86\*.dll" target="lib\x86\"  />
+    <file src="lib\x86\*.dll" target="lib\x86\" />
     <file src="lib\x64\*.dll" target="lib\x64\" />
     <file src="bin\net452\leptonica.net.dll" target="lib/net452/" />
     <file src="bin\net462\leptonica.net.dll" target="lib/net462/" />
-    <file src="bin\net471\leptonica.net.dll" target="lib/net471/" />
-    <file src="leptonica.net.targets" target="build/leptonica.net.targets" />
+    <file src="bin\net471\leptonica.net.dll" target="lib/net471/" /> 
   </files>
 </package>

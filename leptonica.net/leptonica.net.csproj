@@ -409,7 +409,6 @@
     <None Include="leptonica.net.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="leptonica.net.targets" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
