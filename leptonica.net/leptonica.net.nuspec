@@ -12,9 +12,8 @@
     <description>a .net wrapper for Leptonica image manipulation.</description>
     <summary>a .net wrapper for Leptonica image manipulation.</summary>
     <releaseNotes>
-      Added compiled dlls for higher frameworks.
-      Changed to use a leptonica.net target file to remove actual project dll includes.  This should resolve the issue where people forget to set copy to output directory to true.
-      Added pixReadFromMemoryStream(System.IO.Stream stream) @CSharpReaper -- Not tested 
+      Made Leptonica.Native.DllImports public -- NOT BEST OPTION BUT HEY
+      Added public static property LeptonicaDirectory in Leptonica.Native.DllImports so users can specify where dlls are located manually
     </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>leptonica dotNet image manipulation</tags>

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Leptonica.Native
 {
-    internal class DllImports
+    public class DllImports
     {
         private const string pattern = @"pvt.cppan.demo.";
         private const string x64 = @"x64";
@@ -13,24 +13,56 @@ namespace Leptonica.Native
 
         static DllImports()
         {
-            string directory = string.Format("{0}\\{1}", Environment.CurrentDirectory, x86);
+            if (string.IsNullOrWhiteSpace(LeptonicaDirectory))
+            {
+                LeptonicaDirectory = Environment.CurrentDirectory;
+            }
+            CopyDlls();
+        }
+
+        private static string leptonicaDirectory;
+        public static string LeptonicaDirectory
+        {
+            get
+            {
+                return leptonicaDirectory;
+            }
+            set
+            {
+                if (value != leptonicaDirectory)
+                {
+                    if (Directory.Exists(value))
+                    {
+                        leptonicaDirectory = value;
+                        CopyDlls();
+                    }
+                }
+            }
+        }
+
+        public static void CopyDlls()
+        {
+            string directory = string.Format("{0}\\{1}", LeptonicaDirectory, x86);
 
             if (Architecture.is64BitProcess)
             {
-                directory = string.Format("{0}\\{1}", Environment.CurrentDirectory, x64);
+                directory = string.Format("{0}\\{1}", LeptonicaDirectory, x64);
             }
 
-            foreach (string file in Directory.GetFiles(directory))
+            if (Directory.Exists(directory))
             {
-                FileInfo fi = new FileInfo(file);
-                if (fi.Name.StartsWith(pattern)) // must copy
+                foreach (string file in Directory.GetFiles(directory))
                 {
-                    string newLocation = string.Format("{0}\\{1}",
-                                                Environment.CurrentDirectory,
-                                                fi.Name);
-                    if (!File.Exists(newLocation))
+                    FileInfo fi = new FileInfo(file);
+                    if (fi.Name.StartsWith(pattern)) // must copy
                     {
-                        File.Copy(file, newLocation, true);
+                        string newLocation = string.Format("{0}\\{1}",
+                                                    Environment.CurrentDirectory,
+                                                    fi.Name);
+                        if (!File.Exists(newLocation))
+                        {
+                            File.Copy(file, newLocation, true);
+                        }
                     }
                 }
             }
