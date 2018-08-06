@@ -3742,7 +3742,7 @@ namespace Leptonica.Native
 
         // Decision: table vs text
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixDecideIfTable")]
-        internal static extern int pixDecideIfTable(HandleRef pixs, HandleRef box, out int pistable, HandleRef pixadb);
+        internal static extern int pixDecideIfTable(HandleRef pixs, HandleRef box, int orient, out int pscore, HandleRef pixadb);
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixPrepare1bpp")]
         internal static extern IntPtr pixPrepare1bpp(HandleRef pixs, HandleRef box, float cropfract, int outres);
 

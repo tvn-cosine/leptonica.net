@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Leptonica.Definitions.Pix;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Leptonica
@@ -242,14 +243,14 @@ namespace Leptonica
 
 
         // Decision: table vs text
-        public static int pixDecideIfTable(this Pix pixs, Box box, out int pistable, Pixa pixadb)
+        public static int pixDecideIfTable(this Pix pixs, Box box, ImageOrientationFlags imageOrientationFlags, out int pscore, Pixa pixadb)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
-            }
+            }  
 
-            return Native.DllImports.pixDecideIfTable((HandleRef)pixs, (HandleRef)box, out pistable, (HandleRef)pixadb);
+            return Native.DllImports.pixDecideIfTable((HandleRef)pixs, (HandleRef)box, (int)imageOrientationFlags, out pscore, (HandleRef)pixadb);
         }
 
         public static Pix pixPrepare1bpp(this Pix pixs, Box box, float cropfract, int outres)

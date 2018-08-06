@@ -177,6 +177,7 @@
     <Compile Include="Definitions\Pix\HorizonalWarpDirection.cs" />
     <Compile Include="Definitions\Pix\HorizonalWarpStretchMode.cs" />
     <Compile Include="Definitions\Pix\HSVHistogramFlags.cs" />
+    <Compile Include="Definitions\Pix\ImageOrientationFlags.cs" />
     <Compile Include="Definitions\Pix\LineOrientationFlags.cs" />
     <Compile Include="Definitions\Pix\LocationFilterFlags.cs" />
     <Compile Include="Definitions\Pix\Pix.cs" />

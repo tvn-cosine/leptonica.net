@@ -12,8 +12,7 @@
     <description>a .net wrapper for Leptonica image manipulation.</description>
     <summary>a .net wrapper for Leptonica image manipulation.</summary>
     <releaseNotes>
-      Made Leptonica.Native.DllImports public -- NOT BEST OPTION BUT HEY
-      Added public static property LeptonicaDirectory in Leptonica.Native.DllImports so users can specify where dlls are located manually
+      Fixed dll interop reference to pixDecideIfTable
     </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>leptonica dotNet image manipulation</tags>
