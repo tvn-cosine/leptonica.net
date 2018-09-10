@@ -32,11 +32,12 @@ namespace leptonica.net.console
         }
 
         private static void testIsTable()
-        { 
+        {
+            int pscore;
             Leptonica.Native.DllImports.LeptonicaDirectory = @"C:\Test\leptonica";
             Pix pix1 = Pix.Read(@"C:\Test\leptonica\Test.jpg");
             Pixa pixadb = PixaBasic.pixaCreate(0);  
-            PageSeg.pixDecideIfTable(pix1, null, Leptonica.Definitions.Pix.ImageOrientationFlags.L_PORTRAIT_MODE, out int pscore, pixadb);
+            PageSeg.pixDecideIfTable(pix1, null, Leptonica.Definitions.Pix.ImageOrientationFlags.L_PORTRAIT_MODE, out pscore, pixadb);
             var istable = (pscore >= 2) ? 1.0F : 0.0F;
             Console.WriteLine("Is this a table result: {0}", istable);
             pix1.pixDestroy(); 

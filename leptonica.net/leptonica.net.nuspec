@@ -21,6 +21,7 @@
   <files>
     <file src="lib\x86\*.dll" target="build\x86\" />
     <file src="lib\x64\*.dll" target="build\x64\" />
+    <file src="bin\net45\leptonica.net.dll" target="lib/net45/" />
     <file src="bin\net452\leptonica.net.dll" target="lib/net452/" />
     <file src="bin\net462\leptonica.net.dll" target="lib/net462/" />
     <file src="bin\net471\leptonica.net.dll" target="lib/net471/" />
