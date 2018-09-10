@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "leptonica.net", "leptonica.net\leptonica.net.csproj", "{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}"
 EndProject
@@ -12,6 +12,7 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		net45|Any CPU = net45|Any CPU
 		net452|Any CPU = net452|Any CPU
 		net462|Any CPU = net462|Any CPU
 		net471|Any CPU = net471|Any CPU
@@ -20,6 +21,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.net45|Any CPU.ActiveCfg = net45|Any CPU
+		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.net45|Any CPU.Build.0 = net45|Any CPU
 		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.net452|Any CPU.ActiveCfg = net452|Any CPU
 		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.net452|Any CPU.Build.0 = net452|Any CPU
 		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.net462|Any CPU.ActiveCfg = net462|Any CPU
@@ -30,6 +33,8 @@ Global
 		{821E68DA-A2A3-40BF-9829-D5806DCB7EEF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.net45|Any CPU.ActiveCfg = net45|Any CPU
+		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.net45|Any CPU.Build.0 = net45|Any CPU
 		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.net452|Any CPU.ActiveCfg = net452|Any CPU
 		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.net452|Any CPU.Build.0 = net452|Any CPU
 		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.net462|Any CPU.ActiveCfg = net462|Any CPU
@@ -40,6 +45,8 @@ Global
 		{B1C5D767-D733-4988-80F2-FA4C1F40C8F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.net45|Any CPU.ActiveCfg = net45|Any CPU
+		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.net45|Any CPU.Build.0 = net45|Any CPU
 		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.net452|Any CPU.ActiveCfg = net452|Any CPU
 		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.net452|Any CPU.Build.0 = net452|Any CPU
 		{30ADD123-858C-48AE-B219-85D3E8E3D32A}.net462|Any CPU.ActiveCfg = net462|Any CPU
