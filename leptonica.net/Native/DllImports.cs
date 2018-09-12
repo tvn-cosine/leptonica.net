@@ -467,17 +467,17 @@ namespace Leptonica.Native
 
         #region binreduce.c
         // Subsampled 2x reduction
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixExpandBinaryPower2")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixReduceBinary2")]
         internal static extern IntPtr pixReduceBinary2(HandleRef pixs, IntPtr intab);
 
         // Rank filtered 2x reductions
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixExpandBinaryPower2")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixReduceRankBinaryCascade")]
         internal static extern IntPtr pixReduceRankBinaryCascade(HandleRef pixs, int level1, int level2, int level3, int level4);
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixExpandBinaryPower2")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixReduceRankBinary2")]
         internal static extern IntPtr pixReduceRankBinary2(HandleRef pixs, int level, IntPtr intab);
 
         // Permutation table for 2x rank binary reduction
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixExpandBinaryPower2")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "makeSubsampleTab2x")]
         internal static extern IntPtr makeSubsampleTab2x(IntPtr v);
         #endregion
 

@@ -12,8 +12,9 @@
     <description>a .net wrapper for Leptonica image manipulation.</description>
     <summary>a .net wrapper for Leptonica image manipulation.</summary>
     <releaseNotes>
-      Fixed dll interop reference to pixDecideIfTable
-    </releaseNotes>
+		Fixed boxaSort2d() function -> https://github.com/fdncred
+		Fixed pixReduce...() function interop declarations -> https://github.com/fdncred
+	</releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>leptonica dotNet image manipulation</tags>
     <dependencies />

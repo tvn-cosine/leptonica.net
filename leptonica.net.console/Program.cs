@@ -14,7 +14,7 @@ namespace leptonica.net.console
         public static void Main(string[] args)
         {
             testSimple();
-            testIsTable();
+           // testIsTable();
         }
 
         private static void testSimple()
@@ -26,7 +26,7 @@ namespace leptonica.net.console
             Console.WriteLine("Expected {0} and returned {1}", ImageFileFormatTypes.IFF_PNG, pix.InputFormat);
             Console.WriteLine("Expected {0} and returned {1}", 96, pix.XRes);
             Console.WriteLine("Expected {0} and returned {1}", 96, pix.YRes);
-
+             
             Console.WriteLine("Done...");
             Console.ReadKey();
         }

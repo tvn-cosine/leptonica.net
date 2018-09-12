@@ -192,7 +192,7 @@ namespace Leptonica
             }
         }
 
-        public static Boxaa boxaSort2d(this Boxa boxas, out Numa pnaad, int delta1, int delta2, int minh1)
+        public static Boxaa boxaSort2d(this Boxa boxas, out Numaa pnaad, int delta1, int delta2, int minh1)
         {
             if (null == boxas)
             {
@@ -208,7 +208,7 @@ namespace Leptonica
             }
             else
             {
-                pnaad = new Numa(pnaadPtr);
+                pnaad = new Numaa(pnaadPtr);
             }
 
             if (IntPtr.Zero == pointer)

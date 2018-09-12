@@ -34,8 +34,8 @@ Write-Host "########"
 
 if (Test-Path "$localDirectory\\$projectName\\")
 {
-    Remove-Item "$localDirectory\$projectName\" -Force -Recurse
-    Write-Host "Done removing directory..."
+    #Remove-Item "$localDirectory\$projectName\" -Force -Recurse
+   # Write-Host "Done removing directory..."
 } 
 
 if (-not (Test-Path "$localDirectory\"))
