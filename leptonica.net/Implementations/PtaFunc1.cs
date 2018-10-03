@@ -171,7 +171,8 @@ namespace Leptonica
 
         public static Pix pixGenerateFromPta(this Pta pta, int w, int h)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixGenerateFromPta((HandleRef)pta, w, h);
+            return new Pix(pointer);
         }
 
         public static Pta ptaGetBoundaryPixels(this Pix pixs, int type)
@@ -181,7 +182,18 @@ namespace Leptonica
 
         public static Ptaa ptaaGetBoundaryPixels(this Pix pixs, int type, int connectivity, out Boxa pboxa, out Pixa ppixa)
         {
-            throw new NotImplementedException();
+            IntPtr pboxaPtr, ppixaPtr;
+            var pointer = Native.DllImports.ptaaGetBoundaryPixels((HandleRef)pixs, (int)type, connectivity, out pboxaPtr, out ppixaPtr);
+            if (pboxaPtr == IntPtr.Zero)
+                pboxa = null;
+            else
+                pboxa = new Boxa(pboxaPtr);
+            if (ppixaPtr == IntPtr.Zero)
+                ppixa = null;
+            else
+                ppixa = new Pixa(ppixaPtr);
+
+            return new Ptaa(pointer);
         }
 
         public static Ptaa ptaaIndexLabeledPixels(this Pix pixs, out int pncc)

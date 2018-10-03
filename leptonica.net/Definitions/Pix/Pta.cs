@@ -8,5 +8,7 @@ namespace Leptonica
     public class Pta : LeptonicaObjectBase
     {
         public Pta(IntPtr pointer) : base(pointer) { }
+
+        public int Count { get { return this.ptaGetCount(); } }
     }
 }

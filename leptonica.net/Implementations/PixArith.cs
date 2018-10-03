@@ -20,7 +20,8 @@ namespace Leptonica
         // Two-image grayscale arithmetic operations(8, 16, 32 bpp)
         public static  Pix pixAddGray(this Pix pixd, Pix pixs1, Pix pixs2)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixAddGray((HandleRef)pixd, (HandleRef)pixs1, (HandleRef)pixs2);
+            return new Pix(pointer);
         }
 
         public static  Pix pixSubtractGray(this Pix pixd, Pix pixs1, Pix pixs2)
@@ -32,7 +33,8 @@ namespace Leptonica
         // Grayscale threshold operation(8, 16, 32 bpp)
         public static  Pix pixThresholdToValue(this Pix pixd, Pix pixs, int threshval, int setval)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixThresholdToValue((HandleRef)pixd, (HandleRef)pixs, threshval, setval);
+            return new Pix(pointer);
         }
 
 

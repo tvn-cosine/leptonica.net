@@ -8,7 +8,8 @@ namespace Leptonica
         // Binary seedfill(source: Luc Vincent)
         public static Pix pixSeedfillBinary(this Pix pixd, Pix pixs, Pix pixm, int connectivity)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixSeedfillBinary((HandleRef)pixd, (HandleRef)pixs, (HandleRef)pixm, connectivity);
+            return new Pix(pointer);
         }
 
         public static Pix pixSeedfillBinaryRestricted(this Pix pixd, Pix pixs, Pix pixm, int connectivity, int xmax, int ymax)

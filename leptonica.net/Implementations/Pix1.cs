@@ -224,6 +224,16 @@ namespace Leptonica
             }
 
             var pointer = (IntPtr)ppix;
+            // If the refcount is 1 we're about to destroy it
+            // If it's greater than 1 then we're just going to decrement the refcount
+            if (ppix.RefCount == 1)
+            {
+                // Free the additional items Darren added
+                ppix?.Bitmap?.Dispose();
+                //if (ppix.Colormap != null)
+                //    ppix.Colormap.pixcmapDestroy();
+                ppix?.pixFreeData();
+            }
             Native.DllImports.pixDestroy(ref pointer);
             ppix = null;
         }
@@ -1113,6 +1123,17 @@ namespace Leptonica
             }
 
             return Native.DllImports.pixPrintStreamInfo(fp, (HandleRef)pix, text);
+        }
+
+        /// <summary>
+        /// Convert Pix to Bitmap
+        /// </summary>
+        /// <param name="pixs">Pix Source</param>
+        /// <param name="includeAlpha">Should Alpha Channel Be Included</param>
+        /// <returns></returns>
+        public static System.Drawing.Bitmap ToBitmap(this Pix pixs, bool includeAlpha = false)
+        {
+            return Pix.Convert(pixs, includeAlpha);
         }
     }
 }

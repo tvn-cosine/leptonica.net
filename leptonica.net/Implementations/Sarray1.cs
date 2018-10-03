@@ -8,7 +8,8 @@ namespace Leptonica
         // Create/Destroy/Copy
         public static Sarray sarrayCreate(int n)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.sarrayCreate(n);
+            return new Sarray(pointer);
         }
 
         public static Sarray sarrayCreateInitialized(int n, string initstr)
@@ -18,7 +19,8 @@ namespace Leptonica
 
         public static Sarray sarrayCreateWordsFromString(string str)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.sarrayCreateWordsFromString(str);
+            return new Sarray(pointer);
         }
 
         public static Sarray sarrayCreateLinesFromString(string str, int blankflag)
@@ -28,7 +30,9 @@ namespace Leptonica
 
         public static void sarrayDestroy(this Sarray psa)
         {
-            throw new NotImplementedException();
+            var pointer = (IntPtr)psa;
+            Native.DllImports.sarrayDestroy(ref pointer);
+            psa = null;
         }
 
         public static Sarray sarrayCopy(this Sarray sa)
@@ -45,7 +49,7 @@ namespace Leptonica
         // Add/Remove string
         public static int sarrayAddString(this Sarray sa, string str, int copyflag)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.sarrayAddString((HandleRef)sa, str, (int)copyflag);
         }
 
         public static IntPtr sarrayRemoveString(this Sarray sa, int index)
@@ -55,7 +59,7 @@ namespace Leptonica
 
         public static int sarrayReplaceString(this Sarray sa, int index, string newstr, int copyflag)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.sarrayReplaceString((HandleRef)sa, index, newstr, (int)copyflag);
         }
 
         public static int sarrayClear(this Sarray sa)
@@ -67,7 +71,7 @@ namespace Leptonica
         // Accessors
         public static int sarrayGetCount(this Sarray sa)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.sarrayGetCount((HandleRef)sa);
         }
 
         public static IntPtr sarrayGetArray(this Sarray sa, out int pnalloc, out int pn)
@@ -75,14 +79,15 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static IntPtr sarrayGetString(this Sarray sa, int index, int copyflag)
+        public static string sarrayGetString(this Sarray sa, int index, AccessAndStorageFlags copyflag)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.sarrayGetString((HandleRef)sa, index, (int)copyflag);
+            return Marshal.PtrToStringAnsi(pointer);
         }
 
         public static int sarrayGetRefcount(this Sarray sa)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.sarrayGetRefcount((HandleRef)sa);
         }
 
         public static int sarrayChangeRefcount(this Sarray sa, int delta)

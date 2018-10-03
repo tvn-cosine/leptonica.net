@@ -5,7 +5,7 @@ namespace Leptonica
 {
     public static class JbClass
     {
-        // Initialization 
+        // Initialization
         public static JbClasser jbRankHausInit(int components, int maxwidth, int maxheight, int size, float rank)
         {
             var pointer = Native.DllImports.jbRankHausInit(components, maxwidth, maxheight, size, rank);
@@ -45,7 +45,7 @@ namespace Leptonica
             }
         }
 
-        // Classify the pages 
+        // Classify the pages
         public static int jbAddPages(this JbClasser classer, Sarray safiles)
         {
             if (null == classer
@@ -81,7 +81,7 @@ namespace Leptonica
             return Native.DllImports.jbAddPageComponents((HandleRef)classer, (HandleRef)pixs, (HandleRef)boxas, (HandleRef)pixas);
         }
 
-        // Rank hausdorff classifier 
+        // Rank hausdorff classifier
         public static int jbClassifyRankHaus(this JbClasser classer, Boxa boxa, Pixa pixas)
         {
             if (null == classer
@@ -121,7 +121,7 @@ namespace Leptonica
             return Native.DllImports.pixRankHaustest((HandleRef)pix1, (HandleRef)pix2, (HandleRef)pix3, (HandleRef)pix4, delx, dely, maxdiffw, maxdiffh, area1, area3, rank, tab8);
         }
 
-        // Binary correlation classifier 
+        // Binary correlation classifier
         public static int jbClassifyCorrelation(this JbClasser classer, Boxa boxa, Pixa pixas)
         {
             if (null == classer
@@ -134,7 +134,7 @@ namespace Leptonica
             return Native.DllImports.jbClassifyCorrelation((HandleRef)classer, (HandleRef)boxa, (HandleRef)pixas);
         }
 
-        // Determine the image components we start with 
+        // Determine the image components we start with
         public static int jbGetComponents(this Pix pixs, int components, int maxwidth, int maxheight, out Boxa pboxad, out Pixa ppixad)
         {
             if (null == pixs)
@@ -151,17 +151,34 @@ namespace Leptonica
             return result;
         }
 
-        public static int pixWordMaskByDilation(this Pix pixs, int maxdil, out Pix ppixm, out int psize)
+        //public static int pixWordMaskByDilation(this Pix pixs, int maxdil, out Pix ppixm, out int psize)
+        //{
+        //    if (null == pixs)
+        //    {
+        //        throw new ArgumentNullException("pixs cannot be null.");
+        //    }
+
+        //    IntPtr ppixmPtr;
+        //    var result = Native.DllImports.pixWordMaskByDilation((HandleRef)pixs, maxdil, out ppixmPtr, out psize);
+
+        //    ppixm = new Pix(ppixmPtr);
+
+        //    return result;
+        //}
+
+        public static int pixWordMaskByDilation(this Pix pixs, out Pix ppixm, out int psize, out Pixa pixadb)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            IntPtr ppixmPtr;
-            var result = Native.DllImports.pixWordMaskByDilation((HandleRef)pixs, maxdil, out ppixmPtr, out psize);
+            var result = Native.DllImports.pixWordMaskByDilation((HandleRef)pixs, out IntPtr ppixmPtr, out psize, out IntPtr pixadbPtr);
 
             ppixm = new Pix(ppixmPtr);
+            // TODO: pixadbPtr is always messed up - not sure why
+            //pixadb = new Pixa(pixadbPtr);
+            pixadb = null;
 
             return result;
         }
@@ -181,7 +198,7 @@ namespace Leptonica
             return result;
         }
 
-        // Build grayscale composites(templates) 
+        // Build grayscale composites(templates)
         public static Pixa jbAccumulateComposites(this Pixaa pixaa, out Numa pna, out Pta pptat)
         {
             if (null == pixaa)
@@ -223,7 +240,7 @@ namespace Leptonica
             }
         }
 
-        // Utility functions for Classer 
+        // Utility functions for Classer
         public static JbClasser jbClasserCreate(int method, int components)
         {
             var pointer = Native.DllImports.jbClasserCreate(method, components);
@@ -249,7 +266,7 @@ namespace Leptonica
             Native.DllImports.jbClasserDestroy(ref pointer);
         }
 
-        // Utility functions for Data 
+        // Utility functions for Data
         public static JbData jbDataSave(this JbClasser classer)
         {
             if (null == classer)

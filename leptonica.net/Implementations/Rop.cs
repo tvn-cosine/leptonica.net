@@ -8,7 +8,7 @@ namespace Leptonica
         // General rasterop 
         public static int pixRasterop(this Pix pixd, int dx, int dy, int dw, int dh, int op, Pix pixs, int sx, int sy)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.pixRasterop((HandleRef)pixd, dx, dy, dw, dh, (int)op, (HandleRef)pixs, sx, sy);
         }
 
         // In-place full band translation 

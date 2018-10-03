@@ -130,7 +130,54 @@ namespace Leptonica
         // Unpacking conversion from 1 bpp to 2, 4, 8, 16 and 32 bpp
         public static Pix pixUnpackBinary(this Pix pixs, int depth, int invert)
         {
-            throw new NotImplementedException();
+            if (null == pixs)
+                throw new ArgumentNullException("pixs cannot be null.");
+
+            if (pixs.Depth != 1)
+                throw new ArgumentException("pixs not 1 bpp.");
+
+            if (depth != 2 && depth != 4 && depth != 8 && depth != 16 && depth != 32)
+                throw new ArgumentException("depth not 2, 4, 8, 16, or 32 bpp.");
+
+            Pix pixd = Pix.Create(pixs.Width, pixs.Height, depth);
+
+            if (pixs.Depth == 2)
+            {
+                if (invert == 0)
+                    pixConvert1To2(pixd, pixs, 0, 3);
+                else
+                    pixConvert1To2(pixd, pixs, 3, 0);
+            }
+            else if (depth == 4)
+            {
+                if (invert == 0)
+                    pixConvert1To4(pixd, pixs, 0, 15);
+                else  /* invert bits */
+                    pixConvert1To4(pixd, pixs, 15, 0);
+            }
+            else if (depth == 8)
+            {
+                if (invert == 0)
+                    pixConvert1To8(pixd, pixs, 0, 255);
+                else  /* invert bits */
+                    pixConvert1To8(pixd, pixs, 255, 0);
+            }
+            else if (depth == 16)
+            {
+                if (invert == 0)
+                    pixConvert1To16(pixd, pixs, 0, 0xffff);
+                else  /* invert bits */
+                    pixConvert1To16(pixd, pixs, 0xffff, 0);
+            }
+            else
+            {
+                if (invert == 0)
+                    pixConvert1To32(pixd, pixs, 0, 0xffffffff);
+                else
+                    pixConvert1To32(pixd, pixs, 0xffffffff, 0);
+            }
+
+            return pixd;
         }
 
         public static Pix pixConvert1To16(this Pix pixd, Pix pixs, ushort val0, ushort val1)
@@ -140,7 +187,27 @@ namespace Leptonica
 
         public static Pix pixConvert1To32(this Pix pixd, Pix pixs, uint val0, uint val1)
         {
-            throw new NotImplementedException();
+            if (null == pixs)
+                throw new ArgumentNullException("pixs cannot be null.");
+
+            if (pixs.Depth != 1)
+                throw new ArgumentException("pixs not 1 bpp.");
+
+            if (null != pixd)
+            {
+                if (pixs.Width != pixd.Width || pixs.Height != pixd.Height)
+                    throw new ArgumentException("pix sizes unequal.");
+                if (pixd.Depth != 32)
+                    throw new ArgumentException("pixd not 32 bpp.");
+            }
+            else
+            {
+                pixd = Pix.Create(pixs.Width, pixs.Height, 32);
+            }
+            Native.DllImports.pixCopyResolution((HandleRef)pixd, (HandleRef)pixs);
+
+            var pointer = Native.DllImports.pixConvert1To32((HandleRef)pixd, (HandleRef)pixs, val0, val1);
+            return new Pix(pointer);
         }
 
 
@@ -152,9 +219,27 @@ namespace Leptonica
 
         public static Pix pixConvert1To2(this Pix pixd, Pix pixs, int val0, int val1)
         {
-            throw new NotImplementedException();
-        }
+            if (null == pixs)
+                throw new ArgumentNullException("pixs cannot be null.");
 
+            if (pixs.Depth != 1)
+                throw new ArgumentException("pixs not 1 bpp.");
+
+            if (null != pixd)
+            {
+                if (pixs.Width != pixd.Width || pixs.Height != pixd.Height)
+                    throw new ArgumentException("pix sizes unequal.");
+                if (pixd.Depth != 2)
+                    throw new ArgumentException("pixd not 2 bpp.");
+            }
+            else
+            {
+                pixd = Pix.Create(pixs.Width, pixs.Height, 2);
+            }
+            Native.DllImports.pixCopyResolution((HandleRef)pixd, (HandleRef)pixs);
+            var pointer = Native.DllImports.pixConvert1To2((HandleRef)pixd, (HandleRef)pixs, val0, val1);
+            return new Pix(pointer);
+        }
 
         // Unpacking conversion from 1 bpp to 4 bpp
         public static Pix pixConvert1To4Cmap(this Pix pixs)
@@ -176,7 +261,26 @@ namespace Leptonica
 
         public static Pix pixConvert1To8(this Pix pixd, Pix pixs, byte val0, byte val1)
         {
-            throw new NotImplementedException();
+            if (null == pixs)
+                throw new ArgumentNullException("pixs cannot be null.");
+
+            if (pixs.Depth != 1)
+                throw new ArgumentException("pixs not 1 bpp.");
+
+            if (null != pixd)
+            {
+                if (pixs.Width != pixd.Width || pixs.Height != pixd.Height)
+                    throw new ArgumentException("pix sizes unequal.");
+                if (pixd.Depth != 8)
+                    throw new ArgumentException("pixd not 8 bpp.");
+            }
+            else
+            {
+                pixd = Pix.Create(pixs.Width, pixs.Height, 8);
+            }
+            Native.DllImports.pixCopyResolution((HandleRef)pixd, (HandleRef)pixs);
+            var pointer = Native.DllImports.pixConvert1To8((HandleRef)pixd, (HandleRef)pixs, val0, val1);
+            return new Pix(pointer);
         }
 
         public static Pix pixConvert2To8(this Pix pixs, byte val0, byte val1, byte val2, byte val3, int cmapflag)
@@ -189,18 +293,17 @@ namespace Leptonica
             throw new NotImplementedException();
     }
 
-
-    // Unpacking conversion from 8 bpp to 16 bpp
-    public static Pix pixConvert8To16(this Pix pixs, int leftshift)
+        // Unpacking conversion from 8 bpp to 16 bpp
+        public static Pix pixConvert8To16(this Pix pixs, int leftshift)
         {
             throw new NotImplementedException();
         }
 
-
         // Top-level conversion to 1 bpp
         public static Pix pixConvertTo1(this Pix pixs, int threshold)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixConvertTo1((HandleRef)pixs, threshold);
+            return new Pix(pointer);
         }
 
         public static Pix pixConvertTo1BySampling(this Pix pixs, int factor, int threshold)
@@ -208,11 +311,11 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-
         // Top-level conversion to 8 bpp
         public static Pix pixConvertTo8(this Pix pixs, int cmapflag)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixConvertTo8((HandleRef)pixs, cmapflag);
+            return new Pix(pointer);
         }
 
         public static Pix pixConvertTo8BySampling(this Pix pixs, int factor, int cmapflag)

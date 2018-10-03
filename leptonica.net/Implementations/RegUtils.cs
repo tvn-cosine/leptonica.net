@@ -5,14 +5,20 @@ namespace Leptonica
 {
     public static class RegUtils
     {
-        public static int regTestSetup(int argc, IntPtr argv, out L_RegParams prp)
+        public static int regTestSetup(int argc, string argv, out L_RegParams prp)
         {
-            throw new NotImplementedException();
+            var strPtr = new string[] { argv };
+            var ret = Native.DllImports.regTestSetup(argc, strPtr, out IntPtr prpPtr);
+            if (prpPtr != null)
+                prp = new L_RegParams(prpPtr);
+            else
+                prp = null;
+            return ret;
         }
 
         public static int regTestCleanup(this L_RegParams rp)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.regTestCleanup((HandleRef)rp);
         }
 
         public static int regTestCompareValues(this L_RegParams rp, float val1, float val2, float delta)
@@ -47,7 +53,7 @@ namespace Leptonica
 
         public static int regTestWritePixAndCheck(this L_RegParams rp, Pix pix, int format)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.regTestWritePixAndCheck((HandleRef)rp, (HandleRef)pix, (int)format);
         }
 
         public static IntPtr regTestGenLocalFilename(this L_RegParams rp, int index, int format)

@@ -8,12 +8,14 @@ namespace Leptonica
         // Create/destroy/copy:
         public static Sela selaCreate(int n)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.selaCreate(n);
+            return new Sela(pointer);
         }
 
         public static void selaDestroy(this Sela psela)
         {
-            throw new NotImplementedException();
+            var pointer = (IntPtr)psela;
+            Native.DllImports.selaDestroy(ref pointer);
         }
 
         public static Sel selCreate(int height, int width, string name)
@@ -23,7 +25,8 @@ namespace Leptonica
 
         public static void selDestroy(this Sel psel)
         {
-            throw new NotImplementedException();
+            var pointer = (IntPtr)psel;
+            Native.DllImports.selDestroy(ref pointer);
         }
 
         public static Sel selCopy(this Sel sel)
@@ -33,7 +36,8 @@ namespace Leptonica
 
         public static Sel selCreateBrick(int h, int w, int cy, int cx, int type)
         {
-            throw new NotImplementedException();
+            var sel = Native.DllImports.selCreateBrick(h, w, cy, cx, (int)type);
+            return new Sel(sel);
         }
 
         public static Sel selCreateComb(int factor1, int factor2, int direction)
@@ -52,7 +56,7 @@ namespace Leptonica
         // Extension of sela:
         public static int selaAddSel(this Sela sela, Sel sel, string selname, int copyflag)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.selaAddSel((HandleRef)sela, (HandleRef)sel, selname, copyflag);
         }
 
 
@@ -138,7 +142,8 @@ namespace Leptonica
         // Rotation by multiples of 90 degrees
         public static Sel selRotateOrth(this Sel sel, int quads)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.selRotateOrth((HandleRef)sel, quads);
+            return new Sel(pointer);
         }
 
 
@@ -165,7 +170,7 @@ namespace Leptonica
 
         public static int selaWrite(string fname, Sela sela)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.selaWrite(fname, (HandleRef)sela);
         }
 
         public static int selaWriteStream(IntPtr fp, Sela sela)
@@ -175,7 +180,7 @@ namespace Leptonica
 
         public static int selWrite(string fname, Sel sel)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.selWrite(fname, (HandleRef)sel);
         }
 
         public static int selWriteStream(IntPtr fp, Sel sel)
@@ -187,21 +192,21 @@ namespace Leptonica
         // Building custom hit-miss sels from compiled strings
         public static Sel selCreateFromString(string text, int h, int w, string name)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.selCreateFromString(text, h, w, name);
+            return new Sel(pointer);
         }
 
-        public static IntPtr selPrintToString(this Sel sel)
+        public static string selPrintToString(this Sel sel)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.selPrintToString((HandleRef)sel);
+            return Marshal.PtrToStringAnsi(pointer);
         }
-
 
         // Building custom hit-miss sels from a simple file format
         public static Sela selaCreateFromFile(string filename)
         {
             throw new NotImplementedException();
         }
-
 
         // Making hit-only sels from Pta and Pix
         public static Sel selCreateFromPta(HandleRef pta, int cy, int cx, string name)
@@ -235,7 +240,8 @@ namespace Leptonica
 
         public static Pix selaDisplayInPix(this Sela sela, int size, int gthick, int spacing, int ncols)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.selaDisplayInPix((HandleRef)sela, size, gthick, spacing, ncols);
+            return new Pix(pointer);
         }
     }
 }

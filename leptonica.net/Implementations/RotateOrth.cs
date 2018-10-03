@@ -8,7 +8,8 @@ namespace Leptonica
         // Top-level rotation by multiples of 90 degrees
          public static  Pix  pixRotateOrth(this Pix pixs, int quads)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixRotateOrth((HandleRef)pixs, quads);
+            return new Pix(pointer);
         }
 
 

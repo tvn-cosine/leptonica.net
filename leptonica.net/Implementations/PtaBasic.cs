@@ -138,9 +138,11 @@ namespace Leptonica
 
         public static void ptaaDestroy(this Ptaa pptaa)
         {
-            throw new NotImplementedException();
+            var pointer = (IntPtr)pptaa;
+            Native.DllImports.ptaaDestroy(ref pointer);
+            pointer = IntPtr.Zero;
+            pptaa = null;
         }
-
 
         // Ptaa array extension
         public static int ptaaAddPta(this Ptaa ptaa, Pta pta, int copyflag)
@@ -148,11 +150,10 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-
         // Ptaa accessors
         public static int ptaaGetCount(this Ptaa ptaa)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.ptaaGetCount((HandleRef)ptaa);
         }
 
         public static Pta ptaaGetPta(this Ptaa ptaa, int index, int accessflag)

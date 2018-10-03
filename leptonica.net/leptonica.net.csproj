@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net452|AnyCPU'">
     <OutputPath>bin\net452\</OutputPath>
@@ -41,6 +43,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net462|AnyCPU'">
     <OutputPath>bin\net462\</OutputPath>
@@ -52,6 +55,7 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net471|AnyCPU'">
     <OutputPath>bin\net471\</OutputPath>
@@ -63,16 +67,7 @@
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net45|AnyCPU'">
-    <OutputPath>bin\net45\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -173,6 +168,7 @@
     <Compile Include="Definitions\Pix\FlagsForColormapConversion.cs" />
     <Compile Include="Definitions\Pix\FlagsForGettingWhiteOrBlackValue.cs" />
     <Compile Include="Definitions\Pix\FlagsForPlottingOnAPix.cs" />
+    <Compile Include="Definitions\Pix\FlagsForRasterOp.cs" />
     <Compile Include="Definitions\Pix\FlagsForReplacingInvalidBoxes.cs" />
     <Compile Include="Definitions\Pix\FlagsForSelectingBoxBoundariesFromTwoChoices.cs" />
     <Compile Include="Definitions\Pix\FlagsForSelectingDisplayProgram.cs" />
@@ -417,29 +413,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CreateNuGetPackage.ps1" />
+    <None Include="Help\Leptonica_1.77_PRE.chm" />
     <None Include="leptonica.net.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="lib\x64\leptonica-1.77.0d.ilk" />
+    <None Include="lib\x86\leptonica-1.77.0d.ilk" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="lib\x64\leptonica-1.77.0.dll" />
+    <Content Include="lib\x64\leptonica-1.77.0d.dll" />
+    <Content Include="lib\x64\leptonica-1.77.0d.pdb" />
+    <Content Include="lib\x86\leptonica-1.77.0.dll" />
+    <Content Include="lib\x86\leptonica-1.77.0d.dll" />
+    <Content Include="lib\x86\leptonica-1.77.0d.pdb" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="leptonica.net.targets" />
-    <None Include="lib\x64\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.jpeg-9.2.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.madler.zlib-1.2.11.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.png-1.6.33.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.tiff-4.0.9.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.webp-0.6.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.jpeg-9.2.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.madler.zlib-1.2.11.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.png-1.6.33.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.tiff-4.0.9.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.webp-0.6.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

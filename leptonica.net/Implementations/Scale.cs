@@ -38,7 +38,6 @@ namespace Leptonica
         }
 
         /// <summary>
-
         /// </summary>
         /// <param name="pixs"></param>
         /// <param name="delw">change in width, in pixels; 0 means no change</param>
@@ -83,6 +82,34 @@ namespace Leptonica
             }
 
             var pointer = Native.DllImports.pixScaleToSize((HandleRef)pixs, wd, hd);
+            if (IntPtr.Zero == pointer)
+            {
+                return null;
+            }
+            else
+            {
+                return new Pix(pointer);
+            }
+        }
+
+        /// <summary>
+        /// pixScaleToResolution()
+        /// <param name="pixs"></param>
+        /// <param name="target">desired resolution</param>
+        /// <param name="assumed">assumed resolution if not defined; typ. 300.</param>
+        /// <param name="pscalefact">[optional] actual scaling factor used</param>
+        /// <returns>pixd, or NULL on error</returns>
+        /// </summary>
+        /// <returns></returns>
+        public static Pix pixScaleToResolution(this Pix pixs, float target, float assumed, float pscalefact)
+        {
+            //internal static extern IntPtr pixScaleToResolution(HandleRef pixs, float target, float assumed, float pscalefact);
+            if (null == pixs)
+            {
+                throw new ArgumentNullException("pixs cannot be null.");
+            }
+
+            var pointer = Native.DllImports.pixScaleToResolution((HandleRef)pixs, target, assumed, pscalefact);
             if (IntPtr.Zero == pointer)
             {
                 return null;

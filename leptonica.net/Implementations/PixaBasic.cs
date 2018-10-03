@@ -102,7 +102,7 @@ namespace Leptonica
             }
             else
             {
-                return new Pixa(pointer); 
+                return new Pixa(pointer);
             }
         }
 
@@ -160,14 +160,14 @@ namespace Leptonica
             return Native.DllImports.pixaChangeRefcount((HandleRef)pixa, delta);
         }
 
-        public static Pix pixaGetPix(this Pixa pixa, int index, int accesstype)
+        public static Pix pixaGetPix(this Pixa pixa, int index, AccessAndStorageFlags accesstype)
         {
             if (null == pixa)
             {
                 throw new ArgumentNullException("pixa cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaGetPix((HandleRef)pixa, index, accesstype);
+            var pointer = Native.DllImports.pixaGetPix((HandleRef)pixa, index, (int)accesstype);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -646,7 +646,7 @@ namespace Leptonica
 
             return Native.DllImports.pixaaClear((HandleRef)paa);
         }
-         
+
         public static int pixaaTruncate(this Pixaa paa)
         {
             if (null == paa)

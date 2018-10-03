@@ -46,8 +46,8 @@ namespace Leptonica
 
         public static Pix pixReduceRankBinary2(this Pix pixs, int level, IntPtr intab)
         {
-            if (null == pixs
-             || IntPtr.Zero == intab)
+            if (null == pixs)
+             //|| IntPtr.Zero == intab)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }

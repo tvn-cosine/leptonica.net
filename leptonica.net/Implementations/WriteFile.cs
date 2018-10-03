@@ -407,6 +407,22 @@ namespace Leptonica
             Native.DllImports.l_chooseDisplayProg(selection);
         }
 
+        /// <summary>
+        /// setLeptDebugOK()
+        /// </summary>
+        /// <param name="allow">allow     TRUE (1) or FALSE (0)</param>
+        /// <![CDATA[
+        ///  * Notes:
+        ///(1) This sets or clears the global variable LeptDebugOK, to
+        ///    control writing files in a temp directory with names that
+        ///    are compiled in.
+        ///(2) The default in the library distribution is 0.  Call with
+        ///    %allow = 1 for development and debugging.
+        /// ]]>
+        public static void setLeptDebugOK(int allow)
+        {
+            Native.DllImports.setLeptDebugOK(allow);
+        }
 
         // Deprecated pix output for debugging
         /// <summary>

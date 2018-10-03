@@ -18,7 +18,8 @@ namespace Leptonica
 
         public static Pix pixRotateAMGray(this Pix pixs, float angle, byte grayval)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixRotateAMGray((HandleRef)pixs, angle, grayval);
+            return new Pix(pointer);
         }
 
 
