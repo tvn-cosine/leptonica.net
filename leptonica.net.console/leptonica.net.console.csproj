@@ -86,11 +86,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Test.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\leptonica.net\leptonica.net.csproj">
       <Project>{821e68da-a2a3-40bf-9829-d5806dcb7eef}</Project>
       <Name>leptonica.net</Name>

@@ -183,7 +183,7 @@ namespace Leptonica
             return result;
         }
 
-        public static int pixWordBoxesByDilation(this Pix pixs, int maxdil, int minwidth, int minheight, int maxwidth, int maxheight, out Boxa pboxa, out int psize)
+        public static int pixWordBoxesByDilation(this Pix pixs, int minwidth, int minheight, int maxwidth, int maxheight, out Boxa pboxa, out int psize, Pixa pixadb)
         {
             if (null == pixs)
             {
@@ -191,8 +191,7 @@ namespace Leptonica
             }
 
             IntPtr pboxaPtr;
-            var result = Native.DllImports.pixWordBoxesByDilation((HandleRef)pixs, maxdil, minwidth, minheight, maxwidth, maxheight, out pboxaPtr, out psize);
-
+            var result = Native.DllImports.pixWordBoxesByDilation((HandleRef)pixs, minwidth, minheight, maxwidth, maxheight, out pboxaPtr, out psize, (HandleRef)pixadb);
             pboxa = new Boxa(pboxaPtr);
 
             return result;

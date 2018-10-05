@@ -8,7 +8,9 @@ namespace Leptonica
     /// </summary>
     public class Pixa : LeptonicaObjectBase
     {
-        public Pixa(IntPtr pointer) : base(pointer) { }
+        public Pixa(IntPtr pointer) : base(pointer)
+        {
+        }
 
         public int Count
         {

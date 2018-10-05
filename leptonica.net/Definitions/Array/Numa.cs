@@ -8,7 +8,9 @@ namespace Leptonica
     /// </summary>
     public class Numa : LeptonicaObjectBase
     {
-        public Numa(IntPtr pointer) : base(pointer) { }
+        public Numa(IntPtr pointer) : base(pointer)
+        {
+        }
 
         public int Count
         {
