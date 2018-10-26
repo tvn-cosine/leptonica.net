@@ -89,7 +89,8 @@ namespace Leptonica
         // Scale pix for maximum dynamic range
         public static  Pix pixMaxDynamicRange(this Pix pixs, int type)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixMaxDynamicRange((HandleRef)pixs, (int)type);
+            return new Pix(pointer);
         }
 
         public static  Pix pixMaxDynamicRangeRGB(this Pix pixs, int type)

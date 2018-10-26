@@ -141,17 +141,23 @@ namespace Leptonica
         }
 
         // Find the most "populated" colors in the image(and quantize)
-        public static int pixGetMostPopulatedColors(this Pix pixs, int sigbits, int factor, int ncolors, out IntPtr parray, out PixColormap pcmap)
+        public static int pixGetMostPopulatedColors(this Pix pixs, int sigbits, int factor, int ncolors, out uint[] array, out PixColormap pcmap)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            IntPtr pcmapPtr;
-            var result = Native.DllImports.pixGetMostPopulatedColors((HandleRef)pixs, sigbits, factor, ncolors, out parray, out pcmapPtr);
-
+            IntPtr pcmapPtr, parrayPtr;
+            var result = Native.DllImports.pixGetMostPopulatedColors((HandleRef)pixs, sigbits, factor, ncolors, out parrayPtr, out pcmapPtr);
             pcmap = new PixColormap(pcmapPtr);
+
+            // Mashal the colors IntPtr to dotnet uint array
+            array = new uint[ncolors];
+            var byteLen = sizeof(uint) * ncolors;
+            byte[] tmp = new byte[byteLen];
+            Marshal.Copy(parrayPtr, tmp, 0, byteLen);
+            System.Buffer.BlockCopy(tmp, 0, array, 0, byteLen);
 
             return result;
         }

@@ -5,7 +5,7 @@ namespace Leptonica
 {
     public static class Pix1
     {
-        // Pix memory management(allows custom allocator and deallocator) 
+        // Pix memory management(allows custom allocator and deallocator)
         /// <summary>
         ///      (1) Use this to change the alloc and/or dealloc functions;
         ///          e.g., setPixMemoryManager(my_malloc, my_free).
@@ -55,9 +55,26 @@ namespace Leptonica
             return pix;
         }
 
+        public unsafe static Pix pixReadFromMemoryBitmap(this System.Drawing.Bitmap image)
+        {
+            Pix pix;
+
+            using (var ms = new System.IO.MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                var bytes = ms.ToArray();
+                fixed (byte* ptr = bytes)
+                {
+                    pix = BmpIO.pixReadMemBmp((IntPtr)ptr, (IntPtr)bytes.Length);
+                }
+            }
+
+            return pix;
+        }
+
         // Pix creation
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>
@@ -245,7 +262,7 @@ namespace Leptonica
         ///            (b) pixd == pixs(no-op)
         ///            (c) pixd != pixs(data copy; no change in refcount)
         ///          If the refcount of pixd > 1, case (c) will side-effect
-        /// these handles. 
+        /// these handles.
         ///      (2) The general pattern of use is:
         ///             pixd = pixCopy(pixd, pixs);
         ///          This will work for all three cases.
@@ -255,7 +272,7 @@ namespace Leptonica
         ///      (3) For case (c), we check if pixs and pixd are the same
         ///          size(w, h, d).  If so, the data is copied directly.
         ///          Otherwise, the data is reallocated to the correct size
-        /// and the copy proceeds.The refcount of pixd is unchanged. 
+        /// and the copy proceeds.The refcount of pixd is unchanged.
         ///      (4) This operation, like all others that may involve a pre-existing
         /// pixd, will side-effect any existing clones of pixd.
         /// </summary>
@@ -318,7 +335,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix1"></param>
         /// <param name="pix2"></param>
@@ -346,7 +363,7 @@ namespace Leptonica
         ///              void function-inplace(PIX* pix, ...)
         ///          where "..." are non-pointer input parameters, and suppose
         ///          further that you sometimes want to return an arbitrary Pix
-        ///          in place of the input Pix. 
+        ///          in place of the input Pix.
         /// </summary>
         /// <param name="pixd">must be different from pixs</param>
         /// <param name="ppixs">ppixs will be nulled if refcount goes to 0</param>
@@ -407,7 +424,7 @@ namespace Leptonica
 
         // Pix accessors
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -422,7 +439,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="width"></param>
@@ -438,7 +455,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -453,7 +470,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="height"></param>
@@ -469,7 +486,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -484,7 +501,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="depth"></param>
@@ -500,7 +517,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="pw"></param>
@@ -518,7 +535,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="w">use 0 to skip the setting</param>
@@ -536,7 +553,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pixd"></param>
         /// <param name="pixs"></param>
@@ -553,7 +570,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -594,7 +611,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pixd"></param>
         /// <param name="pixs"></param>
@@ -611,7 +628,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -626,7 +643,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="wpl"></param>
@@ -642,7 +659,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -657,7 +674,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="delta"></param>
@@ -673,7 +690,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -688,7 +705,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="res"></param>
@@ -704,7 +721,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -719,7 +736,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="res"></param>
@@ -735,7 +752,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="pxres"></param>
@@ -752,7 +769,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="xres">use 0 to skip the setting</param>
@@ -769,7 +786,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pixd"></param>
         /// <param name="pixs"></param>
@@ -786,7 +803,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="xscale"></param>
@@ -803,7 +820,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -818,7 +835,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="informat"></param>
@@ -834,7 +851,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pixd"></param>
         /// <param name="pixs"></param>
@@ -851,7 +868,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <param name="special"></param>
@@ -918,7 +935,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pixd"></param>
         /// <param name="pixs"></param>
@@ -935,7 +952,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns></returns>
@@ -978,7 +995,7 @@ namespace Leptonica
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="pix"></param>
         /// <returns>false if OK, true on error</returns>
@@ -1027,7 +1044,7 @@ namespace Leptonica
         ///      (1) This extracts the pix image data for use in another context.
         ///          The caller still needs to use pixDestroy() on the input pix.
         ///      (2) If refcount == 1, the data is extracted and the
-        /// pix->data ptr is set to NULL. 
+        /// pix->data ptr is set to NULL.
         ///      (3) If refcount > 1, this simply returns a copy of the data,
         ///          using the pix allocator, and leaving the input pix unchanged.
         /// </summary>
@@ -1064,8 +1081,8 @@ namespace Leptonica
         // Pix line ptrs
         /// <summary>
         ///      (1) This is intended to be used for fast random pixel access.
-        ///          For example, for an 8 bpp image, 
-        ///          is equivalent to, but much faster than, 
+        ///          For example, for an 8 bpp image,
+        ///          is equivalent to, but much faster than,
         ///      (2) How much faster? For 1 bpp, it's from 6 to 10x faster.
         ///          For 8 bpp, it's an amazing 30x faster.  So if you are
         ///          doing random access over a substantial part of the image,
@@ -1086,7 +1103,7 @@ namespace Leptonica
         ///          (This follows the original intent of Simonyi's "Hungarian"
         ///          application notation, where naming is used proactively
         ///          to make errors visibly obvious.)  By doing this, you can
-        ///          tell by inspection if the correct accessor is used. 
+        ///          tell by inspection if the correct accessor is used.
         ///      (5) These are convenient for accessing bytes sequentially in an
         ///          8 bpp grayscale image.  People who write image processing code
         ///          on 8 bpp images are accustomed to grabbing pixels directly out
@@ -1108,7 +1125,7 @@ namespace Leptonica
 
         // Pix debug
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fp">fp file stream</param>
         /// <param name="pix"></param>
@@ -1123,17 +1140,6 @@ namespace Leptonica
             }
 
             return Native.DllImports.pixPrintStreamInfo(fp, (HandleRef)pix, text);
-        }
-
-        /// <summary>
-        /// Convert Pix to Bitmap
-        /// </summary>
-        /// <param name="pixs">Pix Source</param>
-        /// <param name="includeAlpha">Should Alpha Channel Be Included</param>
-        /// <returns></returns>
-        public static System.Drawing.Bitmap ToBitmap(this Pix pixs, bool includeAlpha = false)
-        {
-            return Pix.Convert(pixs, includeAlpha);
         }
     }
 }

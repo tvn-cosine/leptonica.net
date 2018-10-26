@@ -1243,12 +1243,12 @@ namespace Leptonica
         /// <param name="bufg">array of green samples; size w bytes</param>
         /// <param name="bufb">array of blue samples; size w bytes</param>
         /// <returns>false if OK; true on error</returns>
-        public static bool pixGetRGBLine(this Pix pixs, int row, IntPtr bufr, IntPtr bufg, IntPtr bufb)
+        public static bool pixGetRGBLine(this Pix pixs, int row, byte[] bufr, byte[] bufg, byte[] bufb)
         {
             if (null == pixs
-             || IntPtr.Zero == bufr
-             || IntPtr.Zero == bufg
-             || IntPtr.Zero == bufb)
+             || bufr == null || bufr.Length == 0
+             || bufg == null || bufg.Length == 0
+             || bufb == null || bufb.Length == 0)
             {
                 throw new ArgumentNullException("pixs, bufr, bufg, bufb cannot be null");
             }

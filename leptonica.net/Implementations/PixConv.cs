@@ -123,7 +123,8 @@ namespace Leptonica
         // Conversion from grayscale to false color
         public static Pix pixConvertGrayToFalseColor(this Pix pixs, float gamma)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixConvertGrayToFalseColor((HandleRef)pixs, gamma);
+            return new Pix(pointer);
         }
 
 
@@ -288,7 +289,7 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static Pix pixConvert4To8(this Pix pixs, int cmapflag) 
+        public static Pix pixConvert4To8(this Pix pixs, int cmapflag)
         {
             throw new NotImplementedException();
     }
@@ -339,7 +340,8 @@ namespace Leptonica
         // Top-level conversion to 32 bpp(RGB)
         public static Pix pixConvertTo32(this Pix pixs)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixConvertTo32((HandleRef)pixs);
+            return new Pix(pointer);
         }
 
         public static Pix pixConvertTo32BySampling(this Pix pixs, int factor)
@@ -433,6 +435,6 @@ namespace Leptonica
         public static void l_setNeutralBoostVal(int val)
         {
             throw new NotImplementedException();
-        } 
+        }
     }
 }

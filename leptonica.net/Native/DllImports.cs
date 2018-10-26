@@ -404,12 +404,12 @@ namespace Leptonica.Native
         #region bardecode.c
         // Dispatcher
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_getDataBit")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "barcodeDispatchDecoder")]
         internal static extern IntPtr barcodeDispatchDecoder([MarshalAs(UnmanagedType.AnsiBStr)] string barstr, int format, int debugflag);
 
         // Format Determination
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_getDataBit")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "barcodeFormatIsSupported")]
         internal static extern int barcodeFormatIsSupported(int format);
         #endregion
 
@@ -469,26 +469,26 @@ namespace Leptonica.Native
         #region bilateral.c
         // Top level approximate separable grayscale or color bilateral filtering
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bbufferCreate")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixBilateral")]
         internal static extern IntPtr pixBilateral(HandleRef pixs, float spatial_stdev, float range_stdev, int ncomps, int reduction);
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bbufferCreate")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixBilateralGray")]
         internal static extern IntPtr pixBilateralGray(HandleRef pixs, float spatial_stdev, float range_stdev, int ncomps, int reduction);
 
         // Slow, exact implementation of grayscale or color bilateral filtering
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bbufferCreate")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixBilateralExact")]
         internal static extern IntPtr pixBilateralExact(HandleRef pixs, HandleRef spatial_kel, HandleRef range_kel);
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bbufferCreate")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixBilateralGrayExact")]
         internal static extern IntPtr pixBilateralGrayExact(HandleRef pixs, HandleRef spatial_kel, HandleRef range_kel);
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bbufferCreate")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixBlockBilateralExact")]
         internal static extern IntPtr pixBlockBilateralExact(HandleRef pixs, float spatial_stdev, float range_stdev);
 
         // Kernel helper function
 
-        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bbufferCreate")]
+        [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "makeRangeKernel")]
         internal static extern IntPtr makeRangeKernel(float range_stdev);
         #endregion
 
@@ -5043,7 +5043,7 @@ namespace Leptonica.Native
         // Location of page foreground
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixFindPageForeground")]
-        internal static extern IntPtr pixFindPageForeground(HandleRef pixs, int threshold, int mindist, int erasedist, int pagenum, int showmorph, int display, [MarshalAs(UnmanagedType.AnsiBStr)] string pdfdir);
+        internal static extern IntPtr pixFindPageForeground(HandleRef pixs, int threshold, int mindist, int erasedist, int showmorph, HandleRef pixac);
 
         // Extraction of characters from image with only text
 
@@ -5648,7 +5648,7 @@ namespace Leptonica.Native
         internal static extern int extractMinMaxComponent(uint pixel, MinMaxSelectionFlags type);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "pixGetRGBLine")]
-        internal static extern bool pixGetRGBLine(HandleRef pixs, int row, IntPtr bufr, IntPtr bufg, IntPtr bufb);
+        internal static extern bool pixGetRGBLine(HandleRef pixs, int row, byte[] bufr, byte[] bufg, byte[] bufb);
 
         // Conversion between big and little endians
 

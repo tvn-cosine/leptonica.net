@@ -112,21 +112,21 @@ namespace Leptonica
 
 
         // Location of page foreground
-        public static Pix pixFindPageForeground(this Pix pixs, int threshold, int mindist, int erasedist, int pagenum, int showmorph, int display, string pdfdir)
+        public static Box pixFindPageForeground(this Pix pixs, int threshold, int mindist, int erasedist, int showmorph, PixaComp pixac)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            var pointer = Native.DllImports.pixFindPageForeground((HandleRef)pixs, threshold, mindist, erasedist, pagenum, showmorph, display, pdfdir);
+            var pointer = Native.DllImports.pixFindPageForeground((HandleRef)pixs, threshold, mindist, erasedist, showmorph, (HandleRef)pixac);
             if (IntPtr.Zero == pointer)
             {
                 return null;
             }
             else
             {
-                return new Pix(pointer);
+                return new Box(pointer);
             }
         }
 

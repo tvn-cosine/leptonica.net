@@ -13,10 +13,17 @@ namespace Leptonica
         public Pix(IntPtr pointer) : base(pointer)
         {
             if (pointer != null && pointer != IntPtr.Zero)
-                Bitmap = Convert(this);
+            {
+                Pointer = pointer;
+                var bpp = Native.DllImports.pixGetDepth(new HandleRef(this, pointer));
+                if (bpp == 1 || bpp > 3)
+                    Bitmap = CreateBitmap();
+            }
         }
 
         #region [ Properties ]
+        public IntPtr Pointer { get; set; }
+
         public int Width
         {
             get
@@ -91,6 +98,8 @@ namespace Leptonica
                 }
             }
         }
+
+        public int Stride { get { return Wpl * 4; } }
 
         public int RefCount
         {
@@ -183,19 +192,62 @@ namespace Leptonica
             }
         }
 
+        public string DataHash { get; set; }
+
+        public string ComputeDataHash(ref byte[] data)
+        {
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+                return BitConverter.ToString(md5.ComputeHash(data));
+        }
+
         private Bitmap _bmp;
 
         public Bitmap Bitmap
         {
-            get { return _bmp; }
+            get
+            {
+                var bmp = CreateBitmap();
+                if (bmp != null)
+                {
+                    _bmp?.Dispose();
+                    _bmp = bmp;
+                }
+                return _bmp;
+            }
             set
             {
-                if ((_bmp != null) && (!object.ReferenceEquals(_bmp, value)))
-                {
+                if ((_bmp != null) && (!ReferenceEquals(_bmp, value)))
                     _bmp.Dispose();
-                }
+
                 _bmp = value;
             }
+        }
+
+        private Bitmap CreateBitmap()
+        {
+            // Check the data to see if it has changed
+            var dataSize = Stride * Height;
+            byte[] _data = new byte[dataSize];
+            Marshal.Copy(Data, _data, 0, _data.Length);
+            var hash = ComputeDataHash(ref _data);
+            //Array.Clear(_data, 0, _data.Length);
+            _data = null;
+
+            if (IsDirty(hash))
+                return this.ToBitmap();
+            else
+                return null;
+        }
+
+        private bool IsDirty(string hash)
+        {
+            if (!hash.Equals(DataHash))
+            {
+                DataHash = hash;
+                return true;
+            }
+            else
+                return false;
         }
         #endregion
 
@@ -253,6 +305,8 @@ namespace Leptonica
                     TransferData16(pix, imgData);
                 else if (depth == 8)
                     TransferData8(pix, imgData);
+                else if (depth == 4)
+                    TransferData4(pix, imgData);
                 else if (depth == 1)
                     TransferData1(pix, imgData);
 
@@ -352,7 +406,6 @@ namespace Leptonica
                 for (int x = 0; x < width; x++)
                 {
                     var pixVal = (ushort)GetDataTwoByte(pixLine, x);
-
                     imgLine[x] = pixVal;
                 }
             }
@@ -374,36 +427,45 @@ namespace Leptonica
                 for (int x = 0; x < width; x++)
                 {
                     var pixVal = (byte)GetDataByte(pixLine, x);
-
                     imgLine[x] = pixVal;
                 }
             }
         }
 
-        //private unsafe static void TransferData1(Pix pix, BitmapData imgData)
-        //{
-        //    var imgFormat = imgData.PixelFormat;
-        //    var height = imgData.Height;
-        //    var width = imgData.Width / 8;
-        //    var pixData = pix.pixGetData();
-        //    var wpl = pix.Wpl;
+        private unsafe static void TransferData4(Pix pix, BitmapData imgData)
+        {
+            var imgFormat = imgData.PixelFormat;
+            var height = imgData.Height;
+            var width = imgData.Width;
+            var pixData = pix.pixGetData();
+            var wpl = pix.Wpl;
 
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        uint* pixLine = (uint*)pixData + (y * wpl);
-        //        byte* imgLine = (byte*)imgData.Scan0 + (y * imgData.Stride);
+            for (int y = 0; y < height; y++)
+            {
+                uint* pixLine = (uint*)pixData + (y * wpl);
+                byte* imgLine = (byte*)imgData.Scan0.ToPointer();
 
-        //        for (int x = 0; x < width; x++)
-        //        {
-        //            // Darren - 08/14/18
-        //            // Flip the bits with the ~ opertoar
-        //            // The original code did not have this
-        //            var pixVal = (byte)~GetDataByte(pixLine, x);
+                for (int x = 0; x < width; x++)
+                {
+                    var pixVal = (byte)GetDataQBit(pixLine, x);
 
-        //            imgLine[x] = pixVal;
-        //        }
-        //    }
-        //}
+                    var index = (y * imgData.Stride) + (x >> 1);
+                    var curBy = ((byte*)imgData.Scan0)[index];
+                    if ((x&1) == 1)
+                    {
+                        curBy &= 0xf0;
+                        curBy |= (byte)(pixVal & 0x0f);
+                    }
+                    else
+                    {
+                        curBy &= 0x0f;
+                        curBy |= (byte)(pixVal << 4);
+                    }
+
+                    imgLine[index] = curBy;
+                }
+            }
+        }
 
         private unsafe static void TransferData1(Pix pix, BitmapData imgData)
         {
@@ -433,29 +495,27 @@ namespace Leptonica
 
         private static void TransferPalette(Pix pix, Bitmap img)
         {
-            var pallete = img.Palette;
-            var maxColors = pallete.Entries.Length;
+            var palette = img.Palette;
+            var maxColors = palette.Entries.Length;
             var lastColor = maxColors - 1;
             var colormap = pix.pixGetColormap();// pix.Colormap;
             if (colormap != null && colormap.pixcmapGetCount() <= maxColors)
             {
-                //var colormapCount = colormap.Count;
                 var colormapCount = colormap.pixcmapGetCount();
                 for (int i = 0; i < colormapCount; i++)
-                {
-                    pallete.Entries[i] = colormap[i];
-                }
+                    palette.Entries[i] = colormap[i];
             }
             else
             {
                 for (int i = 0; i < maxColors ; i++)
                 {
                     var value = (byte)(i * 255 / lastColor);
-                    pallete.Entries[i] = Color.FromArgb(value, value, value);
+                    palette.Entries[i] = Color.FromArgb(value, value, value);
                 }
             }
+
             // This is required to force the palette to update!
-            img.Palette = pallete;
+            img.Palette = palette;
         }
         #endregion
 
@@ -464,8 +524,8 @@ namespace Leptonica
             switch (pix.Depth)
             {
                 case 1: return PixelFormat.Format1bppIndexed;
-                //case 2: return PixelFormat.Format4bppIndexed;
-                //case 4: return PixelFormat.Format4bppIndexed;
+                case 2: return PixelFormat.Format4bppIndexed;
+                case 4: return PixelFormat.Format4bppIndexed;
                 case 8: return PixelFormat.Format8bppIndexed;
                 case 16: return PixelFormat.Format16bppGrayScale;
                 case 32: return PixelFormat.Format32bppArgb;
@@ -685,5 +745,127 @@ namespace Leptonica
             *(data + index) = value;
         }
         #endregion
+    }
+
+    public static class PixCustomExtensions
+    {
+        /// <summary>
+        /// Convert Pix to Bitmap
+        /// </summary>
+        /// <param name="pixs">Pix Source</param>
+        /// <param name="includeAlpha">Should Alpha Channel Be Included</param>
+        /// <returns></returns>
+        public static Bitmap ToBitmap(this Pix pixs, bool includeAlpha = false)
+        {
+            return Pix.Convert(pixs, includeAlpha);
+        }
+
+        /// <summary>
+        /// Convert Pix to 3-dimensional byte array
+        /// </summary>
+        /// <param name="pixs">Pix Source</param>
+        /// <param name="parallel">true to run in parallel, false to run sequentially single threaded</param>
+        /// <returns>byte[height][width][3] (r,g,b) </returns>
+        public static byte[][][] pixTo3dByteArrayByLine(this Pix pixs, bool parallel = true)
+        {
+            var h = pixs.Height;
+            var w = pixs.Width;
+            var nImage = new byte[h][][];
+
+            if (!parallel)
+            {
+                var rLine = new byte[w];
+                var gLine = new byte[w];
+                var bLine = new byte[w];
+                for (int y = 0; y < h; y++)
+                {
+                    nImage[y] = new byte[w][];
+
+                    rLine = new byte[w];
+                    gLine = new byte[w];
+                    bLine = new byte[w];
+                    pixs.pixGetRGBLine(y, rLine, gLine, bLine);
+
+                    for (int x = 0; x < rLine.Length; x++)
+                        nImage[y][x] = new byte[] { rLine[x], gLine[x], bLine[x] };
+                }
+                rLine = null;
+                gLine = null;
+                bLine = null;
+            }
+            else
+            {
+                var parallelOpts = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount };
+                System.Threading.Tasks.Parallel.For(0, h, parallelOpts, y =>
+                {
+                    nImage[y] = new byte[w][];
+
+                    byte[] rLine = new byte[w];
+                    byte[] gLine = new byte[w];
+                    byte[] bLine = new byte[w];
+                    pixs.pixGetRGBLine(y, rLine, gLine, bLine);
+
+                    for (int x = 0; x < rLine.Length; x++)
+                        nImage[y][x] = new byte[] { rLine[x], gLine[x], bLine[x] };
+                });
+            }
+            return nImage;
+        }
+
+        /// <summary>
+        /// Convert Pix to 3-dimensional byte array
+        /// </summary>
+        /// <param name="pixs">Source Pix</param>
+        /// <param name="parallel">Run in parallel (defaults to true)</param>
+        /// <param name="includeAlpha">Return the alpha channel too (defaults to true)</param>
+        /// <returns>byte[height][width][3] (r,g,b) or byte[height][width][4] (a,r,g,b)</returns>
+        public static byte[][][] pixTo3dByteArray(this Pix pixs, bool parallel = true, bool includeAlpha = false)
+        {
+            var stride = pixs.Stride;
+            byte[] data = new byte[stride * pixs.Height];
+            Marshal.Copy(pixs.Data, data, 0, data.Length);
+            var byteImage = new byte[pixs.Height][][];
+            var w = pixs.Width;
+            var dataLen = data.Length / 4;
+
+            if (!parallel)
+            {
+                for (int i = 0; i < dataLen; i++)
+                {
+                    var x = i % w;
+                    var y = i / w;
+                    if (x == 0)
+                        byteImage[y] = new byte[w][];
+                    var o = (y * stride + x * 4);
+                    if (includeAlpha)
+                        byteImage[y][x] = new byte[] { data[o], data[o + 3], data[o + 2], data[o + 1] };
+                    else // FYI - Data is in BGR layout
+                        byteImage[y][x] = new byte[] { data[o + 3], data[o + 2], data[o + 1] };
+                }
+            }
+            else
+            {
+                var po = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount };
+                //Precreate array
+                System.Threading.Tasks.Parallel.For(0, dataLen, po, i =>
+                {
+                    //var x = i % w;
+                    //var y = i / w;
+                    if ((i % w) == 0)
+                        byteImage[i / w] = new byte[w][];
+                });
+                System.Threading.Tasks.Parallel.For(0, dataLen, po, i =>
+                {
+                    var x = i % w;
+                    var y = i / w;
+                    var o = (y * stride + x * 4);
+                    if (includeAlpha)
+                        byteImage[y][x] = new byte[] { data[o], data[o + 3], data[o + 2], data[o + 1] };
+                    else // FYI - Data is in BGR layout
+                        byteImage[y][x] = new byte[] { data[o + 3], data[o + 2], data[o + 1] };
+                });
+            }
+            return byteImage;
+        }
     }
 }
