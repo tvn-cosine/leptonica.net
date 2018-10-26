@@ -6,7 +6,7 @@ namespace Leptonica
     public static class PdfIO1
     {
         // 1. Convert specified image files to pdf(one image file per page)
-        public static int convertFilesToPdf(string dirname, string substr, int res, float scalefactor, int type, int quality, string title, string fileout)
+        public static int convertFilesToPdf(string dirname, string substr, int res, float scalefactor, PdfFormattedEncodingTypes type, int quality, string title, string fileout)
         {
             if (string.IsNullOrWhiteSpace(dirname))
             {
@@ -18,20 +18,20 @@ namespace Leptonica
                 throw new System.IO.DirectoryNotFoundException("dirname does not exist.");
             }
 
-            return Native.DllImports.convertFilesToPdf(dirname, substr, res, scalefactor, type, quality, title, fileout);
+            return Native.DllImports.convertFilesToPdf(dirname, substr, res, scalefactor, (int)type, quality, title, fileout);
         }
 
-        public static int saConvertFilesToPdf(this Sarray sa, int res, float scalefactor, int type, int quality, string title, string fileout)
+        public static int saConvertFilesToPdf(this Sarray sa, int res, float scalefactor, PdfFormattedEncodingTypes type, int quality, string title, string fileout)
         {
             if (null == sa)
             {
                 throw new ArgumentNullException("sa cannot be null.");
             }
 
-            return Native.DllImports.saConvertFilesToPdf((HandleRef)sa, res, scalefactor, type, quality, title, fileout);
+            return Native.DllImports.saConvertFilesToPdf((HandleRef)sa, res, scalefactor, (int)type, quality, title, fileout);
         }
 
-        public static int saConvertFilesToPdfData(this Sarray sa, int res, float scalefactor, int type, int quality, string title, out IntPtr pdata, IntPtr pnbytes)
+        public static int saConvertFilesToPdfData(this Sarray sa, int res, float scalefactor, PdfFormattedEncodingTypes type, int quality, string title, out IntPtr pdata, IntPtr pnbytes)
         {
             if (null == sa
              || IntPtr.Zero == pnbytes)
@@ -39,7 +39,7 @@ namespace Leptonica
                 throw new ArgumentNullException("sa, pnbytes cannot be null.");
             }
 
-            return Native.DllImports.saConvertFilesToPdfData((HandleRef)sa, res, scalefactor, type, quality, title, out pdata, pnbytes);
+            return Native.DllImports.saConvertFilesToPdfData((HandleRef)sa, res, scalefactor, (int)type, quality, title, out pdata, pnbytes);
         }
 
         public static int selectDefaultPdfEncoding(this Pix pix, out int ptype)
@@ -100,17 +100,17 @@ namespace Leptonica
         }
 
         // 3. Convert multiple images to pdf(one image per page)
-        public static int pixaConvertToPdf(this Pixa pixa, int res, float scalefactor, int type, int quality, string title, string fileout)
+        public static int pixaConvertToPdf(this Pixa pixa, int res, float scalefactor, PdfFormattedEncodingTypes type, int quality, string title, string fileout)
         {
             if (null == pixa)
             {
                 throw new ArgumentNullException("pixa cannot be null.");
             }
 
-            return Native.DllImports.pixaConvertToPdf((HandleRef)pixa, res, scalefactor, type, quality, title, fileout);
+            return Native.DllImports.pixaConvertToPdf((HandleRef)pixa, res, scalefactor, (int)type, quality, title, fileout);
         }
 
-        public static int pixaConvertToPdfData(this Pixa pixa, int res, float scalefactor, int type, int quality, string title, out IntPtr pdata, IntPtr pnbytes)
+        public static int pixaConvertToPdfData(this Pixa pixa, int res, float scalefactor, PdfFormattedEncodingTypes type, int quality, string title, out IntPtr pdata, IntPtr pnbytes)
         {
             if (null == pixa
              || IntPtr.Zero == pnbytes)
@@ -118,11 +118,11 @@ namespace Leptonica
                 throw new ArgumentNullException("pixa, pnbytes cannot be null.");
             }
 
-            return Native.DllImports.pixaConvertToPdfData((HandleRef)pixa, res, scalefactor, type, quality, title, out pdata, pnbytes);
+            return Native.DllImports.pixaConvertToPdfData((HandleRef)pixa, res, scalefactor, (int)type, quality, title, out pdata, pnbytes);
         }
 
         // 4. Single page, multi-image converters
-        public static int convertToPdf(string filein, int type, int quality, string fileout, int x, int y, int res, string title, out IntPtr plpd, int position)
+        public static int convertToPdf(string filein, PdfFormattedEncodingTypes type, int quality, string fileout, int x, int y, int res, string title, out IntPtr plpd, PdfMultiImageFlags position)
         {
             if (string.IsNullOrWhiteSpace(filein))
             {
@@ -134,10 +134,10 @@ namespace Leptonica
                 throw new System.IO.FileNotFoundException("filein does not exist.");
             }
 
-            return Native.DllImports.convertToPdf(filein, type, quality, fileout, x, y, res, title, out plpd, position);
+            return Native.DllImports.convertToPdf(filein, (int)type, quality, fileout, x, y, res, title, out plpd, (int)position);
         }
 
-        public static int convertImageDataToPdf(IntPtr imdata, IntPtr size, int type, int quality, string fileout, int x, int y, int res, string title, out IntPtr plpd, int position)
+        public static int convertImageDataToPdf(IntPtr imdata, IntPtr size, PdfFormattedEncodingTypes type, int quality, string fileout, int x, int y, int res, string title, out IntPtr plpd, PdfMultiImageFlags position)
         {
             if (IntPtr.Zero == imdata
              || IntPtr.Zero == size)
@@ -145,10 +145,10 @@ namespace Leptonica
                 throw new ArgumentNullException("imdata, size cannot be null.");
             }
 
-            return Native.DllImports.convertImageDataToPdf(imdata, size, type, quality, fileout, x, y, res, title, out plpd, position);
+            return Native.DllImports.convertImageDataToPdf(imdata, size, (int)type, quality, fileout, x, y, res, title, out plpd, (int)position);
         }
 
-        public static int convertToPdfData(string filein, int type, int quality, out IntPtr pdata, IntPtr pnbytes, int x, int y, int res, string title, out IntPtr plpd, int position)
+        public static int convertToPdfData(string filein, PdfFormattedEncodingTypes type, int quality, out IntPtr pdata, IntPtr pnbytes, int x, int y, int res, string title, out IntPtr plpd, PdfMultiImageFlags position)
         {
             if (string.IsNullOrWhiteSpace(filein)
              || IntPtr.Zero == pnbytes)
@@ -161,10 +161,10 @@ namespace Leptonica
                 throw new System.IO.FileNotFoundException("filein does not exist.");
             }
 
-            return Native.DllImports.convertToPdfData(filein, type, quality, out pdata, pnbytes, x, y, res, title, out plpd, position);
+            return Native.DllImports.convertToPdfData(filein, (int)type, quality, out pdata, pnbytes, x, y, res, title, out plpd, (int)position);
         }
 
-        public static int convertImageDataToPdfData(IntPtr imdata, IntPtr size, int type, int quality, out IntPtr pdata, IntPtr pnbytes, int x, int y, int res, string title, out IntPtr plpd, int position)
+        public static int convertImageDataToPdfData(IntPtr imdata, IntPtr size, PdfFormattedEncodingTypes type, int quality, out IntPtr pdata, IntPtr pnbytes, int x, int y, int res, string title, out IntPtr plpd, PdfMultiImageFlags position)
         {
             if (IntPtr.Zero == imdata
              || IntPtr.Zero == size
@@ -173,17 +173,17 @@ namespace Leptonica
                 throw new ArgumentNullException("imdata, size, pnbytes cannot be null.");
             }
 
-            return Native.DllImports.convertImageDataToPdfData(imdata, size, type, quality, out pdata, pnbytes, x, y, res, title, out plpd, position);
+            return Native.DllImports.convertImageDataToPdfData(imdata, size, (int)type, quality, out pdata, pnbytes, x, y, res, title, out plpd, (int)position);
         }
 
-        public static int pixConvertToPdf(this Pix pix, int type, int quality, string fileout, int x, int y, int res, string title, out IntPtr plpd, int position)
+        public static int pixConvertToPdf(this Pix pix, PdfFormattedEncodingTypes type, int quality, string fileout, int x, int y, int res, string title, out IntPtr plpd, PdfMultiImageFlags position)
         {
             if (null == pix)
             {
                 throw new ArgumentNullException("pix cannot be null.");
             }
 
-            return Native.DllImports.pixConvertToPdf((HandleRef)pix, type, quality, fileout, x, y, res, title, out plpd, position);
+            return Native.DllImports.pixConvertToPdf((HandleRef)pix, (int)type, quality, fileout, x, y, res, title, out plpd, (int)position);
         }
 
         public static int pixWriteStreamPdf(IntPtr fp, Pix pix, int res, string title)
@@ -210,7 +210,7 @@ namespace Leptonica
 
 
         // 5. Segmented multi-page, multi-image converter
-        public static int convertSegmentedFilesToPdf(string dirname, string substr, int res, int type, int thresh, Boxaa baa, int quality, float scalefactor, string title, string fileout)
+        public static int convertSegmentedFilesToPdf(string dirname, string substr, int res, PdfFormattedEncodingTypes type, int thresh, Boxaa baa, int quality, float scalefactor, string title, string fileout)
         {
             if (string.IsNullOrWhiteSpace(dirname))
             {
@@ -222,7 +222,7 @@ namespace Leptonica
                 throw new System.IO.DirectoryNotFoundException("dirname does not exist.");
             }
 
-            return Native.DllImports.convertSegmentedFilesToPdf(dirname, substr, res, type, thresh, (HandleRef)baa, quality, scalefactor, title, fileout);
+            return Native.DllImports.convertSegmentedFilesToPdf(dirname, substr, res, (int)type, thresh, (HandleRef)baa, quality, scalefactor, title, fileout);
         }
 
         public static Boxaa convertNumberedMasksToBoxaa(string dirname, string substr, int numpre, int numpost)
@@ -249,7 +249,7 @@ namespace Leptonica
         }
 
         // 6. Segmented single page, multi-image converters
-        public static int convertToPdfSegmented(string filein, int res, int type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, string fileout)
+        public static int convertToPdfSegmented(string filein, int res, PdfFormattedEncodingTypes type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, string fileout)
         {
             if (string.IsNullOrWhiteSpace(filein))
             {
@@ -261,20 +261,20 @@ namespace Leptonica
                 throw new System.IO.FileNotFoundException("filein does not exist.");
             }
 
-            return Native.DllImports.convertToPdfSegmented(filein, res, type, thresh, (HandleRef)boxa, quality, scalefactor, title, fileout);
+            return Native.DllImports.convertToPdfSegmented(filein, res, (int)type, thresh, (HandleRef)boxa, quality, scalefactor, title, fileout);
         }
 
-        public static int pixConvertToPdfSegmented(this Pix pixs, int res, int type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, string fileout)
+        public static int pixConvertToPdfSegmented(this Pix pixs, int res, PdfFormattedEncodingTypes type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, string fileout)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            return Native.DllImports.pixConvertToPdfSegmented((HandleRef)pixs, res, type, thresh, (HandleRef)boxa, quality, scalefactor, title, fileout);
+            return Native.DllImports.pixConvertToPdfSegmented((HandleRef)pixs, res, (int)type, thresh, (HandleRef)boxa, quality, scalefactor, title, fileout);
         }
 
-        public static int convertToPdfDataSegmented(string filein, int res, int type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, out IntPtr pdata, IntPtr pnbytes)
+        public static int convertToPdfDataSegmented(string filein, int res, PdfFormattedEncodingTypes type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, out IntPtr pdata, IntPtr pnbytes)
         {
             if (string.IsNullOrWhiteSpace(filein))
             {
@@ -286,17 +286,17 @@ namespace Leptonica
                 throw new System.IO.FileNotFoundException("filein does not exist.");
             }
 
-            return Native.DllImports.convertToPdfDataSegmented(filein, res, type, thresh, (HandleRef)boxa, quality, scalefactor, title, out pdata, pnbytes);
+            return Native.DllImports.convertToPdfDataSegmented(filein, res, (int)type, thresh, (HandleRef)boxa, quality, scalefactor, title, out pdata, pnbytes);
         }
 
-        public static int pixConvertToPdfDataSegmented(this Pix pixs, int res, int type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, out IntPtr pdata, IntPtr pnbytes)
+        public static int pixConvertToPdfDataSegmented(this Pix pixs, int res, PdfFormattedEncodingTypes type, int thresh, Boxaa boxa, int quality, float scalefactor, string title, out IntPtr pdata, IntPtr pnbytes)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            return Native.DllImports.pixConvertToPdfDataSegmented((HandleRef)pixs, res, type, thresh, (HandleRef)boxa, quality, scalefactor, title, out pdata, pnbytes);
+            return Native.DllImports.pixConvertToPdfDataSegmented((HandleRef)pixs, res, (int)type, thresh, (HandleRef)boxa, quality, scalefactor, title, out pdata, pnbytes);
         }
 
         // 7. Multipage concatenation

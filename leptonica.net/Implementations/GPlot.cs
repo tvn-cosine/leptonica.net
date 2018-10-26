@@ -6,9 +6,9 @@ namespace Leptonica
     public static class GPLOT
     {
         // Basic plotting functions
-        public static GPlot gplotCreate(string rootname, int outformat, string title, string xlabel, string ylabel)
+        public static GPlot gplotCreate(string rootname, GPLOT_OUTPUT outformat, string title, string xlabel, string ylabel)
         {
-            var pointer = Native.DllImports.gplotCreate(rootname, outformat, title, xlabel, ylabel);
+            var pointer = Native.DllImports.gplotCreate(rootname, (int)outformat, title, xlabel, ylabel);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -31,7 +31,7 @@ namespace Leptonica
             Native.DllImports.gplotDestroy(ref pointer);
         }
 
-        public static int gplotAddPlot(this GPlot gplot, Numa nax, Numa nay, int plotstyle, string plottitle)
+        public static int gplotAddPlot(this GPlot gplot, Numa nax, Numa nay, GPLOT_STYLE plotstyle, string plottitle)
         {
             if (null == gplot
              || null == nay)
@@ -39,17 +39,17 @@ namespace Leptonica
                 throw new ArgumentNullException("gplot, nay cannot be null");
             }
 
-            return Native.DllImports.gplotAddPlot((HandleRef)gplot, (HandleRef)nax, (HandleRef)nay, plotstyle, plottitle);
+            return Native.DllImports.gplotAddPlot((HandleRef)gplot, (HandleRef)nax, (HandleRef)nay, (int)plotstyle, plottitle);
         }
 
-        public static int gplotSetScaling(this GPlot gplot, int scaling)
+        public static int gplotSetScaling(this GPlot gplot, GPLOT_SCALING scaling)
         {
             if (null == gplot)
             {
                 throw new ArgumentNullException("gplot cannot be null");
             }
 
-            return Native.DllImports.gplotSetScaling((HandleRef)gplot, scaling);
+            return Native.DllImports.gplotSetScaling((HandleRef)gplot, (int)scaling);
         }
 
         public static int gplotMakeOutput(this GPlot gplot)
@@ -83,17 +83,17 @@ namespace Leptonica
         }
 
         // Quick and dirty plots
-        public static int gplotSimple1(this Numa na, int outformat, string outroot, string title)
+        public static int gplotSimple1(this Numa na, GPLOT_OUTPUT outformat, string outroot, string title)
         {
             if (null == na)
             {
                 throw new ArgumentNullException("na cannot be null");
             }
 
-            return Native.DllImports.gplotSimple1((HandleRef)na, outformat, outroot, title);
+            return Native.DllImports.gplotSimple1((HandleRef)na, (int)outformat, outroot, title);
         }
 
-        public static int gplotSimple2(this Numa na1, Numa na2, int outformat, string outroot, string title)
+        public static int gplotSimple2(this Numa na1, Numa na2, GPLOT_OUTPUT outformat, string outroot, string title)
         {
             if (null == na1
              || null == na2)
@@ -101,30 +101,30 @@ namespace Leptonica
                 throw new ArgumentNullException("na1, na2 cannot be null");
             }
 
-            return Native.DllImports.gplotSimple2((HandleRef)na1, (HandleRef)na2, outformat, outroot, title);
+            return Native.DllImports.gplotSimple2((HandleRef)na1, (HandleRef)na2, (int)outformat, outroot, title);
         }
 
-        public static int gplotSimpleN(this Numaa naa, int outformat, string outroot, string title)
+        public static int gplotSimpleN(this Numaa naa, GPLOT_OUTPUT outformat, string outroot, string title)
         {
             if (null == naa)
             {
                 throw new ArgumentNullException("naa cannot be null");
             }
 
-            return Native.DllImports.gplotSimpleN((HandleRef)naa, outformat, outroot, title);
+            return Native.DllImports.gplotSimpleN((HandleRef)naa, (int)outformat, outroot, title);
         }
 
-        public static int gplotSimpleXY1(this Numa nax, Numa nay, int plotstyle, int outformat, string outroot, string title)
+        public static int gplotSimpleXY1(this Numa nax, Numa nay, GPLOT_STYLE plotstyle, GPLOT_OUTPUT outformat, string outroot, string title)
         {
             if (null == nay)
             {
                 throw new ArgumentNullException("nay cannot be null");
             }
 
-            return Native.DllImports.gplotSimpleXY1((HandleRef)nax, (HandleRef)nay, plotstyle, outformat, outroot, title);
+            return Native.DllImports.gplotSimpleXY1((HandleRef)nax, (HandleRef)nay, (int)plotstyle, (int)outformat, outroot, title);
         }
 
-        public static int gplotSimpleXY2(this Numa nax, Numa nay1, Numa nay2, int plotstyle, int outformat, string outroot, string title)
+        public static int gplotSimpleXY2(this Numa nax, Numa nay1, Numa nay2, GPLOT_STYLE plotstyle, int outformat, string outroot, string title)
         {
             if (null == nay1
              || null == nay2)
@@ -132,17 +132,17 @@ namespace Leptonica
                 throw new ArgumentNullException("nay1, nay2 cannot be null");
             }
 
-            return Native.DllImports.gplotSimpleXY2((HandleRef)nax, (HandleRef)nay1, (HandleRef)nay2, plotstyle, outformat, outroot, title);
+            return Native.DllImports.gplotSimpleXY2((HandleRef)nax, (HandleRef)nay1, (HandleRef)nay2, (int)plotstyle, outformat, outroot, title);
         }
 
-        public static int gplotSimpleXYN(this Numa nax, Numaa naay, int plotstyle, int outformat, string outroot, string title)
+        public static int gplotSimpleXYN(this Numa nax, Numaa naay, GPLOT_STYLE plotstyle, GPLOT_OUTPUT outformat, string outroot, string title)
         {
             if (null == naay)
             {
                 throw new ArgumentNullException("naay cannot be null");
             }
 
-            return Native.DllImports.gplotSimpleXYN((HandleRef)nax, (HandleRef)naay, plotstyle, outformat, outroot, title);
+            return Native.DllImports.gplotSimpleXYN((HandleRef)nax, (HandleRef)naay, (int)plotstyle, (int)outformat, outroot, title);
         }
 
         // Serialize for I/O
@@ -169,7 +169,7 @@ namespace Leptonica
             }
         }
 
-        public static int gplotWrite(string filename, GPlot gplot) 
+        public static int gplotWrite(string filename, GPlot gplot)
         {
             if (string.IsNullOrWhiteSpace(filename))
             {

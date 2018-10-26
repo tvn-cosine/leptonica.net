@@ -34,7 +34,7 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static Sel selCreateBrick(int h, int w, int cy, int cx, int type)
+        public static Sel selCreateBrick(int h, int w, int cy, int cx, StructuringElementTypes type)
         {
             var sel = Native.DllImports.selCreateBrick(h, w, cy, cx, (int)type);
             return new Sel(sel);

@@ -47,7 +47,7 @@ namespace Leptonica
 
 
         // Add/Remove string
-        public static int sarrayAddString(this Sarray sa, string str, int copyflag)
+        public static int sarrayAddString(this Sarray sa, string str, AccessAndStorageFlags copyflag)
         {
             return Native.DllImports.sarrayAddString((HandleRef)sa, str, (int)copyflag);
         }
@@ -57,7 +57,7 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static int sarrayReplaceString(this Sarray sa, int index, string newstr, int copyflag)
+        public static int sarrayReplaceString(this Sarray sa, int index, string newstr, AccessAndStorageFlags copyflag)
         {
             return Native.DllImports.sarrayReplaceString((HandleRef)sa, index, newstr, (int)copyflag);
         }
@@ -214,6 +214,6 @@ namespace Leptonica
         public static Sarray getFilenamesInDirectory(string dirname)
         {
             throw new NotImplementedException();
-        } 
+        }
     }
 }

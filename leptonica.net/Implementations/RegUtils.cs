@@ -51,12 +51,12 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static int regTestWritePixAndCheck(this L_RegParams rp, Pix pix, int format)
+        public static int regTestWritePixAndCheck(this L_RegParams rp, Pix pix, ImageFileFormatTypes format)
         {
             return Native.DllImports.regTestWritePixAndCheck((HandleRef)rp, (HandleRef)pix, (int)format);
         }
 
-        public static IntPtr regTestGenLocalFilename(this L_RegParams rp, int index, int format)
+        public static IntPtr regTestGenLocalFilename(this L_RegParams rp, int index, ImageFileFormatTypes format)
         {
             throw new NotImplementedException();
         }

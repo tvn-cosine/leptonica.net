@@ -6,7 +6,7 @@ namespace Leptonica
     public static class Partition
     {
         // Whitespace block extraction
-        public static Boxa boxaGetWhiteblocks(Boxa boxas, Box box, int sortflag, int maxboxes, float maxoverlap, int maxperim, float fract, int maxpops)
+        public static Boxa boxaGetWhiteblocks(Boxa boxas, Box box, SortTypeFlags sortflag, int maxboxes, float maxoverlap, int maxperim, float fract, int maxpops)
         {
             if (null == boxas
              || null == box)
@@ -14,7 +14,7 @@ namespace Leptonica
                 throw new ArgumentNullException("boxas, box cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaGetWhiteblocks((HandleRef)boxas, (HandleRef)box, sortflag, maxboxes, maxoverlap, maxperim, fract, maxpops);
+            var pointer = Native.DllImports.boxaGetWhiteblocks((HandleRef)boxas, (HandleRef)box, (int)sortflag, maxboxes, maxoverlap, maxperim, fract, maxpops);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -25,7 +25,7 @@ namespace Leptonica
             }
         }
 
-        // Helpers  
+        // Helpers
         public static Boxa boxaPruneSortedOnOverlap(Boxa boxas, float maxoverlap)
         {
             if (null == boxas)

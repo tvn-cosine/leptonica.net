@@ -180,7 +180,7 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static Ptaa ptaaGetBoundaryPixels(this Pix pixs, int type, int connectivity, out Boxa pboxa, out Pixa ppixa)
+        public static Ptaa ptaaGetBoundaryPixels(this Pix pixs, DistanceFunctionBCFlags type, int connectivity, out Boxa pboxa, out Pixa ppixa)
         {
             IntPtr pboxaPtr, ppixaPtr;
             var pointer = Native.DllImports.ptaaGetBoundaryPixels((HandleRef)pixs, (int)type, connectivity, out pboxaPtr, out ppixaPtr);

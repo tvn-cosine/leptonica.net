@@ -107,7 +107,7 @@ namespace Leptonica
         }
 
         // Pixa addition
-        public static int pixaAddPix(this Pixa pixa, Pix pix, int copyflag)
+        public static int pixaAddPix(this Pixa pixa, Pix pix, AccessAndStorageFlags copyflag)
         {
             if (null == pixa
              || null == pix)
@@ -115,7 +115,7 @@ namespace Leptonica
                 throw new ArgumentNullException("pixa, pix cannot be null");
             }
 
-            return Native.DllImports.pixaAddPix((HandleRef)pixa, (HandleRef)pix, copyflag);
+            return Native.DllImports.pixaAddPix((HandleRef)pixa, (HandleRef)pix, (int)copyflag);
         }
 
         public static int pixaAddBox(this Pixa pixa, Box box, int copyflag)
@@ -188,14 +188,14 @@ namespace Leptonica
             return Native.DllImports.pixaGetPixDimensions((HandleRef)pixa, index, out pw, out ph, out pd);
         }
 
-        public static Boxa pixaGetBoxa(this Pixa pixa, int accesstype)
+        public static Boxa pixaGetBoxa(this Pixa pixa, AccessAndStorageFlags accesstype)
         {
             if (null == pixa)
             {
                 throw new ArgumentNullException("pixa cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaGetBoxa((HandleRef)pixa, accesstype);
+            var pointer = Native.DllImports.pixaGetBoxa((HandleRef)pixa, (int)accesstype);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -216,14 +216,14 @@ namespace Leptonica
             return Native.DllImports.pixaGetBoxaCount((HandleRef)pixa);
         }
 
-        public static Box pixaGetBox(this Pixa pixa, int index, int accesstype)
+        public static Box pixaGetBox(this Pixa pixa, int index, AccessAndStorageFlags accesstype)
         {
             if (null == pixa)
             {
                 throw new ArgumentNullException("pixa cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaGetBox((HandleRef)pixa, index, accesstype);
+            var pointer = Native.DllImports.pixaGetBox((HandleRef)pixa, index, (int)accesstype);
             if (IntPtr.Zero == pointer)
             {
                 return null;

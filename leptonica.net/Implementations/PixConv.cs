@@ -292,7 +292,7 @@ namespace Leptonica
         public static Pix pixConvert4To8(this Pix pixs, int cmapflag)
         {
             throw new NotImplementedException();
-    }
+        }
 
         // Unpacking conversion from 8 bpp to 16 bpp
         public static Pix pixConvert8To16(this Pix pixs, int leftshift)

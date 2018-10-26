@@ -274,14 +274,14 @@ namespace Leptonica
         }
 
         // Granulometry on binary images
-        public static Numa pixRunHistogramMorph(this Pix pixs, int runtype, int direction, int maxsize)
+        public static Numa pixRunHistogramMorph(this Pix pixs, RunlengthFlagsForGranulometry runtype, DirectionFlags direction, int maxsize)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            var pointer = Native.DllImports.pixRunHistogramMorph((HandleRef)pixs, runtype, direction, maxsize);
+            var pointer = Native.DllImports.pixRunHistogramMorph((HandleRef)pixs, (int)runtype, (int)direction, maxsize);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -392,7 +392,7 @@ namespace Leptonica
                 throw new ArgumentNullException("pixa, centtab, sumtab cannot be null.");
             }
 
-            return Native.DllImports.pixCentroid((HandleRef)pix, centtab, sumtab, out pxave, out pyave); 
+            return Native.DllImports.pixCentroid((HandleRef)pix, centtab, sumtab, out pxave, out pyave);
         }
     }
 }

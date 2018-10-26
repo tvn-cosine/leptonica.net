@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Leptonica 
+namespace Leptonica
 {
     public static class BoxFunc2
     {
@@ -338,7 +338,7 @@ namespace Leptonica
             return result;
         }
 
-        public static Boxa boxaaFlattenToBoxa(this Boxaa baa, out Numa pnaindex, int copyflag)
+        public static Boxa boxaaFlattenToBoxa(this Boxaa baa, out Numa pnaindex, AccessAndStorageFlags copyflag)
         {
             if (null == baa)
             {
@@ -346,7 +346,7 @@ namespace Leptonica
             }
 
             IntPtr pnaindexPtr;
-            var pointer = Native.DllImports.boxaaFlattenToBoxa((HandleRef)baa, out pnaindexPtr, copyflag);
+            var pointer = Native.DllImports.boxaaFlattenToBoxa((HandleRef)baa, out pnaindexPtr, (int)copyflag);
 
             pnaindex = new Numa(pnaindexPtr);
 
@@ -360,7 +360,7 @@ namespace Leptonica
             }
         }
 
-        public static Boxa boxaaFlattenAligned(this Boxaa baa, int num, Box fillerbox, int copyflag)
+        public static Boxa boxaaFlattenAligned(this Boxaa baa, int num, Box fillerbox, AccessAndStorageFlags copyflag)
         {
             if (null == baa
              || null == fillerbox)
@@ -368,7 +368,7 @@ namespace Leptonica
                 throw new ArgumentNullException("baa, fillerbox cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaaFlattenAligned((HandleRef)baa, num, (HandleRef)fillerbox, copyflag);
+            var pointer = Native.DllImports.boxaaFlattenAligned((HandleRef)baa, num, (HandleRef)fillerbox, (int)copyflag);
 
             if (IntPtr.Zero == pointer)
             {
@@ -380,14 +380,14 @@ namespace Leptonica
             }
         }
 
-        public static Boxaa boxaEncapsulateAligned(this Boxa boxa, int num, int copyflag)
+        public static Boxaa boxaEncapsulateAligned(this Boxa boxa, int num, AccessAndStorageFlags copyflag)
         {
             if (null == boxa)
             {
                 throw new ArgumentNullException("boxa cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaEncapsulateAligned((HandleRef)boxa, num, copyflag);
+            var pointer = Native.DllImports.boxaEncapsulateAligned((HandleRef)boxa, num, (int)copyflag);
 
             if (IntPtr.Zero == pointer)
             {

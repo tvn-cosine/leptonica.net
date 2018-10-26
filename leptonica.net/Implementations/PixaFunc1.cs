@@ -6,14 +6,14 @@ namespace Leptonica
     public static class PixaFunc1
     {
         // Filters
-        public static Pix pixSelectBySize(this Pix pixs, int width, int height, int connectivity, int type, int relation, out int pchanged)
+        public static Pix pixSelectBySize(this Pix pixs, int width, int height, int connectivity, LocationFilterFlags type, SizeFilterFlags relation, out int pchanged)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null");
             }
 
-            var pointer = Native.DllImports.pixSelectBySize((HandleRef)pixs, width, height, connectivity, type, relation, out pchanged);
+            var pointer = Native.DllImports.pixSelectBySize((HandleRef)pixs, width, height, connectivity, (int)type, (int)relation, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -24,14 +24,14 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaSelectBySize(this Pixa pixas, int width, int height, int type, int relation, out int pchanged)
+        public static Pixa pixaSelectBySize(this Pixa pixas, int width, int height, LocationFilterFlags type, SizeFilterFlags relation, out int pchanged)
         {
             if (null == pixas)
             {
                 throw new ArgumentNullException("pixas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSelectBySize((HandleRef)pixas, width, height, type, relation, out pchanged);
+            var pointer = Native.DllImports.pixaSelectBySize((HandleRef)pixas, width, height, (int)type, (int)relation, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -42,14 +42,14 @@ namespace Leptonica
             }
         }
 
-        public static Numa pixaMakeSizeIndicator(this Pixa pixa, int width, int height, int type, int relation)
+        public static Numa pixaMakeSizeIndicator(this Pixa pixa, int width, int height, LocationFilterFlags type, SizeFilterFlags relation)
         {
             if (null == pixa)
             {
                 throw new ArgumentNullException("pixa cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaMakeSizeIndicator((HandleRef)pixa, width, height, type, relation);
+            var pointer = Native.DllImports.pixaMakeSizeIndicator((HandleRef)pixa, width, height, (int)type, (int)relation);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -60,14 +60,14 @@ namespace Leptonica
             }
         }
 
-        public static Pix pixSelectByPerimToAreaRatio(this Pix pixs, float thresh, int connectivity, int type, out int pchanged)
+        public static Pix pixSelectByPerimToAreaRatio(this Pix pixs, float thresh, int connectivity, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null");
             }
 
-            var pointer = Native.DllImports.pixSelectByPerimToAreaRatio((HandleRef)pixs, thresh, connectivity, type, out pchanged);
+            var pointer = Native.DllImports.pixSelectByPerimToAreaRatio((HandleRef)pixs, thresh, connectivity, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -78,14 +78,14 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaSelectByPerimToAreaRatio(this Pixa pixas, float thresh, int type, out int pchanged)
+        public static Pixa pixaSelectByPerimToAreaRatio(this Pixa pixas, float thresh, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixas)
             {
                 throw new ArgumentNullException("pixas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSelectByPerimToAreaRatio((HandleRef)pixas, thresh, type, out pchanged);
+            var pointer = Native.DllImports.pixaSelectByPerimToAreaRatio((HandleRef)pixas, thresh, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -96,14 +96,14 @@ namespace Leptonica
             }
         }
 
-        public static Pix pixSelectByPerimSizeRatio(this Pix pixs, float thresh, int connectivity, int type, out int pchanged)
+        public static Pix pixSelectByPerimSizeRatio(this Pix pixs, float thresh, int connectivity, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null");
             }
 
-            var pointer = Native.DllImports.pixSelectByPerimSizeRatio((HandleRef)pixs, thresh, connectivity, type, out pchanged);
+            var pointer = Native.DllImports.pixSelectByPerimSizeRatio((HandleRef)pixs, thresh, connectivity, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -114,14 +114,14 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaSelectByPerimSizeRatio(this Pixa pixas, float thresh, int type, out int pchanged)
+        public static Pixa pixaSelectByPerimSizeRatio(this Pixa pixas, float thresh, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixas)
             {
                 throw new ArgumentNullException("pixas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSelectByPerimSizeRatio((HandleRef)pixas, thresh, type, out pchanged);
+            var pointer = Native.DllImports.pixaSelectByPerimSizeRatio((HandleRef)pixas, thresh, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -132,14 +132,14 @@ namespace Leptonica
             }
         }
 
-        public static Pix pixSelectByAreaFraction(this Pix pixs, float thresh, int connectivity, int type, out int pchanged)
+        public static Pix pixSelectByAreaFraction(this Pix pixs, float thresh, int connectivity, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null");
             }
 
-            var pointer = Native.DllImports.pixSelectByAreaFraction((HandleRef)pixs, thresh, connectivity, type, out pchanged);
+            var pointer = Native.DllImports.pixSelectByAreaFraction((HandleRef)pixs, thresh, connectivity, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -150,14 +150,14 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaSelectByAreaFraction(this Pixa pixas, float thresh, int type, out int pchanged)
+        public static Pixa pixaSelectByAreaFraction(this Pixa pixas, float thresh, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixas)
             {
                 throw new ArgumentNullException("pixas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSelectByAreaFraction((HandleRef)pixas, thresh, type, out pchanged);
+            var pointer = Native.DllImports.pixaSelectByAreaFraction((HandleRef)pixas, thresh, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -168,14 +168,14 @@ namespace Leptonica
             }
         }
 
-        public static Pix pixSelectByWidthHeightRatio(this Pix pixs, float thresh, int connectivity, int type, out int pchanged)
+        public static Pix pixSelectByWidthHeightRatio(this Pix pixs, float thresh, int connectivity, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null");
             }
 
-            var pointer = Native.DllImports.pixSelectByWidthHeightRatio((HandleRef)pixs, thresh, connectivity, type, out pchanged);
+            var pointer = Native.DllImports.pixSelectByWidthHeightRatio((HandleRef)pixs, thresh, connectivity, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -186,14 +186,14 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaSelectByWidthHeightRatio(this Pixa pixas, float thresh, int type, out int pchanged)
+        public static Pixa pixaSelectByWidthHeightRatio(this Pixa pixas, float thresh, LocationFilterFlags type, out int pchanged)
         {
             if (null == pixas)
             {
                 throw new ArgumentNullException("pixas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSelectByWidthHeightRatio((HandleRef)pixas, thresh, type, out pchanged);
+            var pointer = Native.DllImports.pixaSelectByWidthHeightRatio((HandleRef)pixas, thresh, (int)type, out pchanged);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -303,7 +303,7 @@ namespace Leptonica
         }
 
         // Sort functions
-        public static Pixa pixaSort(this Pixa pixas, int sorttype, int sortorder, out Numa pnaindex, int copyflag)
+        public static Pixa pixaSort(this Pixa pixas, SortTypeFlags sorttype, SortOrderFlags sortorder, out Numa pnaindex, AccessAndStorageFlags copyflag)
         {
             if (null == pixas)
             {
@@ -311,7 +311,7 @@ namespace Leptonica
             }
 
             IntPtr pnaindexPtr;
-            var pointer = Native.DllImports.pixaSort((HandleRef)pixas, sorttype, sortorder, out pnaindexPtr, copyflag);
+            var pointer = Native.DllImports.pixaSort((HandleRef)pixas, (int)sorttype, (int)sortorder, out pnaindexPtr, (int)copyflag);
             pnaindex = new Numa(pnaindexPtr);
             if (IntPtr.Zero == pointer)
             {
@@ -323,7 +323,7 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaBinSort(this Pixa pixas, int sorttype, int sortorder, out Numa pnaindex, int copyflag)
+        public static Pixa pixaBinSort(this Pixa pixas, SortTypeFlags sorttype, SortOrderFlags sortorder, out Numa pnaindex, AccessAndStorageFlags copyflag)
         {
             if (null == pixas)
             {
@@ -331,7 +331,7 @@ namespace Leptonica
             }
 
             IntPtr pnaindexPtr;
-            var pointer = Native.DllImports.pixaBinSort((HandleRef)pixas, sorttype, sortorder, out pnaindexPtr, copyflag);
+            var pointer = Native.DllImports.pixaBinSort((HandleRef)pixas, (int)sorttype, (int)sortorder, out pnaindexPtr, (int)copyflag);
             pnaindex = new Numa(pnaindexPtr);
             if (IntPtr.Zero == pointer)
             {
@@ -343,7 +343,7 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaSortByIndex(this Pixa pixas, Numa naindex, int copyflag)
+        public static Pixa pixaSortByIndex(this Pixa pixas, Numa naindex, AccessAndStorageFlags copyflag)
         {
             if (null == pixas
              || null == naindex)
@@ -351,7 +351,7 @@ namespace Leptonica
                 throw new ArgumentNullException("pixas, na cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSortByIndex((HandleRef)pixas, (HandleRef)naindex, copyflag);
+            var pointer = Native.DllImports.pixaSortByIndex((HandleRef)pixas, (HandleRef)naindex, (int)copyflag);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -362,7 +362,7 @@ namespace Leptonica
             }
         }
 
-        public static Pixaa pixaSort2dByIndex(this Pixa pixas, Numaa naa, int copyflag)
+        public static Pixaa pixaSort2dByIndex(this Pixa pixas, Numaa naa, AccessAndStorageFlags copyflag)
         {
             if (null == pixas
              || null == naa)
@@ -370,7 +370,7 @@ namespace Leptonica
                 throw new ArgumentNullException("pixas, na cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSort2dByIndex((HandleRef)pixas, (HandleRef)naa, copyflag);
+            var pointer = Native.DllImports.pixaSort2dByIndex((HandleRef)pixas, (HandleRef)naa, (int)copyflag);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -382,14 +382,14 @@ namespace Leptonica
         }
 
         // Pixa and Pixaa range selection
-        public static Pixa pixaSelectRange(this Pixa pixas, int first, int last, int copyflag)
+        public static Pixa pixaSelectRange(this Pixa pixas, int first, int last, AccessAndStorageFlags copyflag)
         {
             if (null == pixas)
             {
                 throw new ArgumentNullException("pixas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaSelectRange((HandleRef)pixas, first, last, copyflag);
+            var pointer = Native.DllImports.pixaSelectRange((HandleRef)pixas, first, last, (int)copyflag);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -400,14 +400,14 @@ namespace Leptonica
             }
         }
 
-        public static Pixaa pixaaSelectRange(this Pixaa paas, int first, int last, int copyflag)
+        public static Pixaa pixaaSelectRange(this Pixaa paas, int first, int last, AccessAndStorageFlags copyflag)
         {
             if (null == paas)
             {
                 throw new ArgumentNullException("paas cannot be null");
             }
 
-            var pointer = Native.DllImports.pixaaSelectRange((HandleRef)paas, first, last, copyflag);
+            var pointer = Native.DllImports.pixaaSelectRange((HandleRef)paas, first, last, (int)copyflag);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -528,7 +528,7 @@ namespace Leptonica
             }
         }
 
-        public static Pixa pixaaFlattenToPixa(this Pixaa paa, out Numa pnaindex, int copyflag)
+        public static Pixa pixaaFlattenToPixa(this Pixaa paa, out Numa pnaindex, AccessAndStorageFlags copyflag)
         {
             if (null == paa)
             {
@@ -536,7 +536,7 @@ namespace Leptonica
             }
 
             IntPtr pnaindexPtr;
-            var pointer = Native.DllImports.pixaaFlattenToPixa((HandleRef)paa, out pnaindexPtr, copyflag);
+            var pointer = Native.DllImports.pixaaFlattenToPixa((HandleRef)paa, out pnaindexPtr, (int)copyflag);
             pnaindex = new Numa(pnaindexPtr);
             if (IntPtr.Zero == pointer)
             {

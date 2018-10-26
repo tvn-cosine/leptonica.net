@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Leptonica 
+namespace Leptonica
 {
     public static class BoxFunc4
     {
@@ -45,14 +45,14 @@ namespace Leptonica
         }
 
         // Boxa size selection
-        public static Boxa boxaSelectBySize(this Boxa boxas, int width, int height, int type, int relation, out int pchanged)
+        public static Boxa boxaSelectBySize(this Boxa boxas, int width, int height, LocationFilterFlags type, SizeFilterFlags relation, out int pchanged)
         {
             if (null == boxas)
             {
                 throw new ArgumentNullException("boxas cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaSelectBySize((HandleRef)boxas, width, height, type, relation, out pchanged);
+            var pointer = Native.DllImports.boxaSelectBySize((HandleRef)boxas, width, height, (int)type, (int)relation, out pchanged);
 
             if (IntPtr.Zero == pointer)
             {
@@ -64,14 +64,14 @@ namespace Leptonica
             }
         }
 
-        public static Numa boxaMakeSizeIndicator(this Boxa boxa, int width, int height, int type, int relation)
+        public static Numa boxaMakeSizeIndicator(this Boxa boxa, int width, int height, LocationFilterFlags type, SizeFilterFlags relation)
         {
             if (null == boxa)
             {
                 throw new ArgumentNullException("boxa cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaMakeSizeIndicator((HandleRef)boxa, width, height, type, relation);
+            var pointer = Native.DllImports.boxaMakeSizeIndicator((HandleRef)boxa, width, height, (int)type, (int)relation);
 
             if (IntPtr.Zero == pointer)
             {
@@ -83,14 +83,14 @@ namespace Leptonica
             }
         }
 
-        public static Boxa boxaSelectByArea(this Boxa boxas, int area, int relation, out int pchanged)
+        public static Boxa boxaSelectByArea(this Boxa boxas, int area, SizeFilterFlags relation, out int pchanged)
         {
             if (null == boxas)
             {
                 throw new ArgumentNullException("boxas cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaSelectByArea((HandleRef)boxas, area, relation, out pchanged);
+            var pointer = Native.DllImports.boxaSelectByArea((HandleRef)boxas, area, (int)relation, out pchanged);
 
             if (IntPtr.Zero == pointer)
             {
@@ -102,14 +102,14 @@ namespace Leptonica
             }
         }
 
-        public static Numa boxaMakeAreaIndicator(this Boxa boxa, int area, int relation)
+        public static Numa boxaMakeAreaIndicator(this Boxa boxa, int area, SizeFilterFlags relation)
         {
             if (null == boxa)
             {
                 throw new ArgumentNullException("boxa cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaMakeAreaIndicator((HandleRef)boxa, area, relation);
+            var pointer = Native.DllImports.boxaMakeAreaIndicator((HandleRef)boxa, area, (int)relation);
 
             if (IntPtr.Zero == pointer)
             {
@@ -121,14 +121,14 @@ namespace Leptonica
             }
         }
 
-        public static Boxa boxaSelectByWHRatio(this Boxa boxas, float ratio, int relation, out int pchanged)
+        public static Boxa boxaSelectByWHRatio(this Boxa boxas, float ratio, SizeFilterFlags relation, out int pchanged)
         {
             if (null == boxas)
             {
                 throw new ArgumentNullException("boxas cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaSelectByWHRatio((HandleRef)boxas, ratio, relation, out pchanged);
+            var pointer = Native.DllImports.boxaSelectByWHRatio((HandleRef)boxas, ratio, (int)relation, out pchanged);
 
             if (IntPtr.Zero == pointer)
             {
@@ -140,14 +140,14 @@ namespace Leptonica
             }
         }
 
-        public static Numa boxaMakeWHRatioIndicator(this Boxa boxa, float ratio, int relation)
+        public static Numa boxaMakeWHRatioIndicator(this Boxa boxa, float ratio, SizeFilterFlags relation)
         {
             if (null == boxa)
             {
                 throw new ArgumentNullException("boxa cannot be null.");
             }
 
-            var pointer = Native.DllImports.boxaMakeWHRatioIndicator((HandleRef)boxa, ratio, relation);
+            var pointer = Native.DllImports.boxaMakeWHRatioIndicator((HandleRef)boxa, ratio, (int)relation);
 
             if (IntPtr.Zero == pointer)
             {

@@ -11,7 +11,7 @@ namespace Leptonica
     {
         private HandleRef handle;
 
-        public PixColormap(IntPtr pointer) : base(pointer) { }
+        public PixColormap(IntPtr pointer) : base(pointer) { this.handle = new HandleRef(this, pointer); }
 
         internal HandleRef Handle
         {

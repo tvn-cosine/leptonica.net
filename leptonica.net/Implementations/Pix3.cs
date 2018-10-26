@@ -437,14 +437,14 @@ namespace Leptonica
         }
 
         // Average of pixel values in gray images
-        public static Numa pixAverageByRow(this Pix pix, Box box, int type)
+        public static Numa pixAverageByRow(this Pix pix, Box box, FlagsFor8BitAnd16BitSums type)
         {
             if (null == pix)
             {
                 throw new ArgumentNullException("pix cannot be null");
             }
 
-            var pointer = Native.DllImports.pixAverageByRow((HandleRef)pix, (HandleRef)box, type);
+            var pointer = Native.DllImports.pixAverageByRow((HandleRef)pix, (HandleRef)box, (int)type);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -455,14 +455,14 @@ namespace Leptonica
             }
         }
 
-        public static Numa pixAverageByColumn(this Pix pix, Box box, int type)
+        public static Numa pixAverageByColumn(this Pix pix, Box box, FlagsFor8BitAnd16BitSums type)
         {
             if (null == pix)
             {
                 throw new ArgumentNullException("pix cannot be null");
             }
 
-            var pointer = Native.DllImports.pixAverageByColumn((HandleRef)pix, (HandleRef)box, type);
+            var pointer = Native.DllImports.pixAverageByColumn((HandleRef)pix, (HandleRef)box, (int)type);
             if (IntPtr.Zero == pointer)
             {
                 return null;

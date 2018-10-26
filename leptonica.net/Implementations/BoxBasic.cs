@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Leptonica
 {
     public static class BoxBasic
-    {  
+    {
         // Box creation, copy, clone, destruction
         public static Box boxCreate(int x, int y, int w, int h)
         {
@@ -463,7 +463,7 @@ namespace Leptonica
         }
 
         // Boxaa array extension
-        public static int boxaaAddBoxa(this Boxaa baa, Boxa ba, int copyflag)
+        public static int boxaaAddBoxa(this Boxaa baa, Boxa ba, AccessAndStorageFlags copyflag)
         {
             if (null == baa
              || null == ba)
@@ -471,7 +471,7 @@ namespace Leptonica
                 throw new ArgumentNullException("baa, ba cannot be null");
             }
 
-            return Native.DllImports.boxaaAddBoxa((HandleRef)baa, (HandleRef)ba, copyflag);
+            return Native.DllImports.boxaaAddBoxa((HandleRef)baa, (HandleRef)ba, (int)copyflag);
         }
 
         public static int boxaaExtendArray(this Boxaa baa)

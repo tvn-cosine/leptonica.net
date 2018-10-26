@@ -466,7 +466,7 @@ namespace Leptonica
         }
 
         // Add Numa to Numaa
-        public static int numaaAddNuma(this Numaa naa, Numa na, int copyflag)
+        public static int numaaAddNuma(this Numaa naa, Numa na, AccessAndStorageFlags copyflag)
         {
             if (null == naa
              || null == na)
@@ -474,7 +474,7 @@ namespace Leptonica
                 throw new ArgumentNullException("naa, na cannot be null");
             }
 
-            return Native.DllImports.numaaAddNuma((HandleRef)naa, (HandleRef)na, copyflag);
+            return Native.DllImports.numaaAddNuma((HandleRef)naa, (HandleRef)na, (int)copyflag);
         }
 
         // Numaa accessors
