@@ -39,7 +39,8 @@ namespace Leptonica
         // Conversion from RGB color to grayscale
         public static Pix pixConvertRGBToLuminance(this Pix pixs)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixConvertRGBToLuminance((HandleRef)pixs);
+            return new Pix(pointer);
         }
 
         public static Pix pixConvertRGBToGray(this Pix pixs, float rwt, float gwt, float bwt)

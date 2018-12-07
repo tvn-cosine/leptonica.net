@@ -293,14 +293,14 @@ namespace Leptonica
         }
 
         // Composite operations on grayscale images
-        public static Pix pixTophat(this Pix pixs, int hsize, int vsize, int type)
+        public static Pix pixTophat(this Pix pixs, int hsize, int vsize, MorphologicalTophatFlags type)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            var pointer = Native.DllImports.pixTophat((HandleRef)pixs, hsize, vsize, type);
+            var pointer = Native.DllImports.pixTophat((HandleRef)pixs, hsize, vsize, (int)type);
             if (IntPtr.Zero == pointer)
             {
                 return null;
@@ -328,14 +328,14 @@ namespace Leptonica
                 return new Pix(pointer);
             }
         }
-        public static Pix pixFastTophat(this Pix pixs, int xsize, int ysize, int type)
+        public static Pix pixFastTophat(this Pix pixs, int xsize, int ysize, MorphologicalTophatFlags type)
         {
             if (null == pixs)
             {
                 throw new ArgumentNullException("pixs cannot be null.");
             }
 
-            var pointer = Native.DllImports.pixFastTophat((HandleRef)pixs, xsize, ysize, type);
+            var pointer = Native.DllImports.pixFastTophat((HandleRef)pixs, xsize, ysize, (int)type);
             if (IntPtr.Zero == pointer)
             {
                 return null;

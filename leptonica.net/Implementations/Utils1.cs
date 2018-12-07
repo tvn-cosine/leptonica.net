@@ -32,7 +32,7 @@ namespace Leptonica
         // Test files for equivalence
         public static int filesAreIdentical(string fname1, string fname2, out int psame)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.filesAreIdentical(fname1, fname2, out psame);
         }
 
 

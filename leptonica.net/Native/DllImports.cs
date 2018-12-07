@@ -1338,10 +1338,10 @@ namespace Leptonica.Native
         // Creation, copy, clone, destruction
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaCreate")]
-        internal static extern IntPtr l_byteaCreate(IntPtr nbytes);
+        internal static extern IntPtr l_byteaCreate(int nbytes);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaInitFromMem")]
-        internal static extern IntPtr l_byteaInitFromMem(IntPtr data, IntPtr size);
+        internal static extern IntPtr l_byteaInitFromMem(byte[] data, int size);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaInitFromFile")]
         internal static extern IntPtr l_byteaInitFromFile([MarshalAs(UnmanagedType.AnsiBStr)]  string fname);
@@ -1358,10 +1358,10 @@ namespace Leptonica.Native
         // Accessors
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaGetSize")]
-        internal static extern IntPtr l_byteaGetSize(HandleRef ba);
+        internal static extern int l_byteaGetSize(HandleRef ba);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaGetData")]
-        internal static extern IntPtr l_byteaGetData(HandleRef ba, IntPtr psize);
+        internal static extern IntPtr l_byteaGetData(HandleRef ba, ref int psize);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaCopyData")]
         internal static extern IntPtr l_byteaCopyData(HandleRef ba, IntPtr psize);
@@ -1377,10 +1377,11 @@ namespace Leptonica.Native
         // Join/Split
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaJoin")]
-        internal static extern int l_byteaJoin(HandleRef ba1, out IntPtr pba2);
+        //internal static extern int l_byteaJoin(HandleRef ba1, ref IntPtr pba2);
+        internal static extern int l_byteaJoin(IntPtr ba1, ref IntPtr pba2);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_byteaSplit")]
-        internal static extern int l_byteaSplit(HandleRef ba1, IntPtr splitloc, out IntPtr pba2);
+        internal static extern int l_byteaSplit(HandleRef ba1, int splitloc, out IntPtr pba2);
 
         // Search
 
@@ -9884,7 +9885,7 @@ namespace Leptonica.Native
         // Read and write between file and memory
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_binaryRead")]
-        internal static extern IntPtr l_binaryRead([MarshalAs(UnmanagedType.AnsiBStr)] string filename, out IntPtr pnbytes);
+        internal static extern IntPtr l_binaryRead([MarshalAs(UnmanagedType.AnsiBStr)] string filename, out int pnbytes);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_binaryReadStream")]
         internal static extern IntPtr l_binaryReadStream(IntPtr fp, IntPtr pnbytes);
@@ -9896,7 +9897,7 @@ namespace Leptonica.Native
         internal static extern IntPtr l_binaryReadSelectStream(IntPtr fp, IntPtr start, IntPtr nbytes, IntPtr pnread);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "l_binaryWrite")]
-        internal static extern int l_binaryWrite([MarshalAs(UnmanagedType.AnsiBStr)] string filename, [MarshalAs(UnmanagedType.AnsiBStr)] string operation, IntPtr data, IntPtr nbytes);
+        internal static extern int l_binaryWrite([MarshalAs(UnmanagedType.AnsiBStr)] string filename, [MarshalAs(UnmanagedType.AnsiBStr)] string operation, IntPtr data, int nbytes);
 
         [DllImport(leptonicaDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "nbytesInFile")]
         internal static extern IntPtr nbytesInFile([MarshalAs(UnmanagedType.AnsiBStr)] string filename);

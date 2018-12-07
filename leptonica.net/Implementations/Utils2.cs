@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 namespace Leptonica
 {
     public static class Utils2
-    { 
-        // Safe string procs 
+    {
+        // Safe string procs
         public static IntPtr stringNew(string src)
         {
             throw new NotImplementedException();
@@ -63,7 +63,7 @@ namespace Leptonica
         }
 
 
-        // Find and replace string and array procs 
+        // Find and replace string and array procs
         public static IntPtr stringRemoveChars(string src, string remchars)
         {
             throw new NotImplementedException();
@@ -94,17 +94,19 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        // Safe realloc 
+        // Safe realloc
         public static IntPtr reallocNew(IntPtr pindata, int oldsize, int newsize)
         {
             throw new NotImplementedException();
         }
 
 
-        // Read and write between file and memory 
-        public static IntPtr l_binaryRead(string filename, out IntPtr pnbytes)
+        // Read and write between file and memory
+        public static string l_binaryRead(string filename, out int pnbytes)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.l_binaryRead(filename, out pnbytes);
+            var dataStr = Marshal.PtrToStringAnsi(pointer);
+            return dataStr;
         }
 
         public static IntPtr l_binaryReadStream(IntPtr fp, IntPtr pnbytes)
@@ -122,9 +124,9 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        public static int l_binaryWrite(string filename, string operation, IntPtr data, IntPtr nbytes)
+        public static int l_binaryWrite(string filename, string operation, IntPtr data, int nbytes)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.l_binaryWrite(filename, operation, data, nbytes);
         }
 
         public static IntPtr nbytesInFile(string filename)
@@ -137,13 +139,13 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-        // Copy in memory 
+        // Copy in memory
         public static IntPtr l_binaryCopy(IntPtr datas, IntPtr size)
         {
             throw new NotImplementedException();
         }
 
-        // File copy operations 
+        // File copy operations
         public static int fileCopy(string srcfile, string newfile)
         {
             throw new NotImplementedException();
@@ -160,7 +162,7 @@ namespace Leptonica
         }
 
 
-        // Multi-platform functions for opening file streams 
+        // Multi-platform functions for opening file streams
         public static IntPtr fopenReadStream(string filename)
         {
             throw new NotImplementedException();
@@ -177,14 +179,14 @@ namespace Leptonica
         }
 
 
-        // Opening a windows tmpfile for writing 
+        // Opening a windows tmpfile for writing
         public static IntPtr fopenWriteWinTempfile()
         {
             throw new NotImplementedException();
         }
 
 
-        // Multi-platform functions that avoid C-runtime boundary crossing  with Windows DLLs 
+        // Multi-platform functions that avoid C-runtime boundary crossing  with Windows DLLs
         public static IntPtr lept_fopen(string filename, string mode)
         {
             throw new NotImplementedException();
@@ -206,7 +208,7 @@ namespace Leptonica
         }
 
 
-        // Multi-platform file system operations in temp directories 
+        // Multi-platform file system operations in temp directories
         public static int lept_mkdir(string subdir)
         {
             throw new NotImplementedException();
@@ -248,15 +250,25 @@ namespace Leptonica
         }
 
 
-        // General file name operations 
-        public static int splitPathAtDirectory(string pathname, out IntPtr pdir, out IntPtr ptail)
+        // General file name operations
+        public static int splitPathAtDirectory(string pathname, out string pdir, out string ptail)
         {
-            throw new NotImplementedException();
+            var pdirPtr = IntPtr.Zero;
+            var ptailPtr = IntPtr.Zero;
+            var ret = Native.DllImports.splitPathAtDirectory(pathname, out pdirPtr, out ptailPtr);
+            pdir = Marshal.PtrToStringAnsi(pdirPtr);
+            ptail = Marshal.PtrToStringAnsi(ptailPtr);
+            return ret;
         }
 
-        public static int splitPathAtExtension(string pathname, out IntPtr pbasename, out IntPtr pextension)
+        public static int splitPathAtExtension(string pathname, out string pbasename, out string pextension)
         {
-            throw new NotImplementedException();
+            var pbasenamePtr = IntPtr.Zero;
+            var pextensionPtr = IntPtr.Zero;
+            var ret = Native.DllImports.splitPathAtExtension(pathname, out pbasenamePtr, out pextensionPtr);
+            pbasename = Marshal.PtrToStringAnsi(pbasenamePtr);
+            pextension = Marshal.PtrToStringAnsi(pextensionPtr);
+            return ret;
         }
 
         public static IntPtr pathJoin(string dir, string fname)
@@ -270,7 +282,7 @@ namespace Leptonica
         }
 
 
-        // Special file name operations 
+        // Special file name operations
         public static int convertSepCharsInPath(string path, int type)
         {
             throw new NotImplementedException();

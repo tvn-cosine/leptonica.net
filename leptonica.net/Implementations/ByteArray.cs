@@ -5,17 +5,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Leptonica 
+namespace Leptonica
 {
     public static class ByteArray
     {
         // Creation, copy, clone, destruction
-        public static L_Bytea l_byteaCreate(IntPtr nbytes)
+        public static L_Bytea l_byteaCreate(int nbytes)
         {
-            if (IntPtr.Zero == nbytes)
-            {
-                throw new ArgumentNullException("nbytes cannot be null.");
-            }
+            //if (IntPtr.Zero == nbytes)
+            //{
+            //    throw new ArgumentNullException("nbytes cannot be null.");
+            //}
 
             var pointer = Native.DllImports.l_byteaCreate(nbytes);
 
@@ -29,13 +29,15 @@ namespace Leptonica
             }
         }
 
-        public static L_Bytea l_byteaInitFromMem(IntPtr data, IntPtr size)
+        public static L_Bytea l_byteaInitFromMem(byte[] data, int size)
         {
-            if (IntPtr.Zero == data
-             || IntPtr.Zero == size)
-            {
-                throw new ArgumentNullException("data, size cannot be null.");
-            }
+            //if (IntPtr.Zero == data)//|| IntPtr.Zero == size)
+            //{
+            //    throw new ArgumentNullException("data, size cannot be null.");
+            //}
+
+            if (data == null || data.Length <= 0)
+                throw new ArgumentNullException("data cannot be null.");
 
             var pointer = Native.DllImports.l_byteaInitFromMem(data, size);
 
@@ -55,7 +57,8 @@ namespace Leptonica
             {
                 throw new ArgumentNullException("fname cannot be null.");
             }
-            if (System.IO.File.Exists(fname))
+
+            if (!System.IO.File.Exists(fname))
             {
                 throw new System.IO.FileNotFoundException("fname does not exist");
             }
@@ -123,7 +126,7 @@ namespace Leptonica
         }
 
         // Accessors
-        public static IntPtr l_byteaGetSize(this L_Bytea ba)
+        public static int l_byteaGetSize(this L_Bytea ba)
         {
             if (null == ba)
             {
@@ -133,15 +136,14 @@ namespace Leptonica
             return Native.DllImports.l_byteaGetSize((HandleRef)ba);
         }
 
-        public static IntPtr l_byteaGetData(this L_Bytea ba, IntPtr psize)
+        public static IntPtr l_byteaGetData(this L_Bytea ba, ref int psize)
         {
-            if (null == ba
-             || IntPtr.Zero == psize)
+            if (null == ba)// || IntPtr.Zero == psize)
             {
                 throw new ArgumentNullException("ba, psize cannot be null");
             }
 
-            return Native.DllImports.l_byteaGetData((HandleRef)ba, psize);
+            return Native.DllImports.l_byteaGetData((HandleRef)ba, ref psize);
         }
 
         public static IntPtr l_byteaCopyData(this L_Bytea ba, IntPtr psize)
@@ -175,27 +177,26 @@ namespace Leptonica
                 throw new ArgumentNullException("ba cannot be null");
             }
 
-            return Native.DllImports.l_byteaAppendString((HandleRef)ba, str);
+            var ret = Native.DllImports.l_byteaAppendString((HandleRef)ba, str);
+            return ret;
         }
 
         // Join/Split
-        public static int l_byteaJoin(this L_Bytea ba1, out L_Bytea pba2)
+        public static int l_byteaJoin(L_Bytea ba1, ref L_Bytea pba2)
         {
             if (null == ba1)
-            {
                 throw new ArgumentNullException("ba1 cannot be null");
-            }
 
-            IntPtr pba2Ptr;
-            var result = Native.DllImports.l_byteaJoin((HandleRef)ba1, out pba2Ptr);
-            pba2 = new L_Bytea(pba2Ptr);
-            return result;
+            IntPtr pba2Ptr = pba2.Pointer;
+            IntPtr ba1Ptr = ba1.Pointer;
+            var ret = Native.DllImports.l_byteaJoin(ba1Ptr, ref pba2Ptr);
+            return ret;
         }
 
-        public static int l_byteaSplit(this L_Bytea ba1, IntPtr splitloc, out L_Bytea pba2)
+        public static int l_byteaSplit(this L_Bytea ba1, int splitloc, out L_Bytea pba2)
         {
             if (null == ba1
-             || IntPtr.Zero == splitloc)
+             || 0 == splitloc)
             {
                 throw new ArgumentNullException("ba1, splitloc cannot be null");
             }

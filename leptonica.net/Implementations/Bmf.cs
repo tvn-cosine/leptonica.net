@@ -5,18 +5,18 @@ namespace Leptonica
 {
     public static class Bmf
     {
-        // Acquisition and generation of bitmap fonts. 
+        // Acquisition and generation of bitmap fonts.
         public static L_Bmf bmfCreate(string dir, int fontsize)
         {
-            if (string.IsNullOrWhiteSpace(dir))
-            {
-                throw new ArgumentNullException("dir cannot be null.");
-            }
+            //if (string.IsNullOrWhiteSpace(dir))
+            //{
+            //    throw new ArgumentNullException("dir cannot be null.");
+            //}
 
-            if (!System.IO.Directory.Exists(dir))
-            {
-                throw new System.IO.DirectoryNotFoundException("dir does not exist");
-            }
+            //if (!System.IO.Directory.Exists(dir))
+            //{
+            //    throw new System.IO.DirectoryNotFoundException("dir does not exist");
+            //}
 
             var pointer = Native.DllImports.bmfCreate(dir, fontsize);
             if (IntPtr.Zero == pointer)

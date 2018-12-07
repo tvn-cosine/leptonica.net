@@ -25,7 +25,8 @@ namespace Leptonica
 
         public static Sarray sarrayCreateLinesFromString(string str, int blankflag)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.sarrayCreateLinesFromString(str, blankflag);
+            return new Sarray(pointer);
         }
 
         public static void sarrayDestroy(this Sarray psa)
@@ -176,7 +177,7 @@ namespace Leptonica
 
         public static int sarrayWrite(string filename, Sarray sa)
         {
-            throw new NotImplementedException();
+            return Native.DllImports.sarrayWrite(filename, (HandleRef)sa);
         }
 
         public static int sarrayWriteStream(IntPtr fp, Sarray sa)
@@ -194,7 +195,6 @@ namespace Leptonica
             throw new NotImplementedException();
         }
 
-
         // Directory filenames
         public static Sarray getNumberedPathnamesInDirectory(string dirname, string substr, int numpre, int numpost, int maxnum)
         {
@@ -203,7 +203,8 @@ namespace Leptonica
 
         public static Sarray getSortedPathnamesInDirectory(string dirname, string substr, int first, int nfiles)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.getSortedPathnamesInDirectory(dirname, substr, first, nfiles);
+            return new Sarray(pointer);
         }
 
         public static Sarray convertSortedToNumberedPathnames(this Sarray sa, int numpre, int numpost, int maxnum)

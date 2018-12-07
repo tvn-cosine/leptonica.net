@@ -4,11 +4,12 @@ using System.Runtime.InteropServices;
 namespace Leptonica
 {
     public static class TextOps
-    {        
+    {
         // Font layout
-        public static Pix pixAddSingleTextblock(this Pix pixs, L_Bmf bmf, string textstr, uint val, int location, out int poverflow)
+        public static Pix pixAddSingleTextblock(this Pix pixs, L_Bmf bmf, string textstr, uint val, FlagsForAddingTextToAPix location, out int poverflow)
         {
-            throw new NotImplementedException();
+            var pointer = Native.DllImports.pixAddSingleTextblock((HandleRef)pixs, (HandleRef)bmf, textstr, val, (int)location, out poverflow);
+            return new Pix(pointer);
         }
 
         public static Pix pixAddTextlines(this Pix pixs, L_Bmf bmf, string textstr, uint val, int location)
@@ -63,6 +64,6 @@ namespace Leptonica
         public static Sarray splitStringToParagraphs(string textstr, int splitflag)
         {
             throw new NotImplementedException();
-        } 
+        }
     }
 }
